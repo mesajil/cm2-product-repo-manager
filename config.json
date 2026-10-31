@@ -1,0 +1,76 @@
+{
+  "downloadPath": "C:\\Users\\Memory Kings\\.gemini\\antigravity\\scratch\\repositorios",
+  "templatePath": "W:\\PLANTILLAS_EDICION_LUIS",
+  "brands": [
+    {
+      "name": "WESTERN DIGITAL",
+      "keyword": "WD",
+      "subbrands": [
+        "Western Digital Black Edition",
+        "Western Digital HDD",
+        "Western Digital Micro SD Purple",
+        "Western Digital NAS",
+        "Western Digital SSD",
+        "Western Digital USB"
+      ]
+    },
+    {
+      "name": "PATRIOT",
+      "keyword": "",
+      "subbrands": [
+        "PATRIOT"
+      ]
+    },
+    {
+      "name": "ASUS",
+      "keyword": "",
+      "subbrands": [
+        "ASUS Componentes",
+        "ASUS Empresarial",
+        "ASUS Laptops",
+        "ASUS Monitores",
+        "ASUS NUC Mini PCs",
+        "ASUS PCs Desktop GAMING",
+        "ASUS PCs Empresarial",
+        "ASUS Periféricos",
+        "ASUS Placas Madre",
+        "ASUS Routers",
+        "ASUS Tarjetas de Video"
+      ]
+    },
+    {
+      "name": "GEEKOM",
+      "keyword": "",
+      "subbrands": [
+        "GEEKOM"
+      ]
+    }
+  ],
+  "tipoxpsMappings": {
+    "MEMORIA-RAM": {
+      "1": "MEMORIA-RAM",
+      "2": "700x400"
+    },
+    "DISCO-DURO-INTERNO": {
+      "1": "DISCO-DURO-INTERNO",
+      "2": "700x400"
+    },
+    "PC MINI": {
+      "1": "PC MINI",
+      "2": "700x400"
+    },
+    "LAPTOP": {
+      "3": "700x400"
+    },
+    "N/A": {
+      "2": "700x400"
+    }
+  },
+  "complementos": [
+    "Black",
+    "Negro",
+    "White",
+    "Blanco"
+  ],
+  "history": []
+}

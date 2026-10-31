@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Kings | Generador de Repositorios de Producto</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="theme-dark">
+  <div class="app-container">
+    <!-- Barra Superior / Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <div class="logo-badge">MK</div>
+        <div>
+          <h1 class="header-title">Generador de Repositorios de Producto</h1>
+          <p class="header-subtitle">Inicializador automático de carpetas, JSON docs, multimedia y plantillas Photoshop</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="status-pill" id="templateStatusPill" title="Estado de conexión con unidad de plantillas">
+          <span class="status-dot"></span>
+          <span class="status-text">Verificando W:\...</span>
+        </div>
+        <button type="button" class="btn btn-secondary btn-icon" id="btnOpenSettings" title="Configuración de rutas y plantillas">
+          ⚙️ Ajustes
+        </button>
+      </div>
+    </header>
+
+    <!-- Contenido Principal Dividido en 2 Columnas -->
+    <main class="main-content">
+      <!-- Columna Izquierda: Formulario -->
+      <section class="form-column">
+        <form id="productForm" autocomplete="off">
+          
+          <!-- Sección: Ubicación de Destino -->
+          <div class="card card-accent">
+            <div class="card-header">
+              <span class="card-step">1</span>
+              <div>
+                <h2 class="card-title">Destino del Repositorio</h2>
+                <p class="card-desc">Ubicación donde se creará la carpeta del producto</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="downloadPath" class="form-label">
+                  Carpeta de descarga / Directorio base
+                </label>
+                <div class="input-with-button">
+                  <input type="text" id="downloadPath" class="form-input" placeholder="C:\..." required>
+                  <button type="button" class="btn btn-secondary" id="btnOpenBaseFolder" title="Abrir carpeta base en explorador">
+                    📂 Abrir
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-group mb-0">
+                <label class="form-label">
+                  Nombre de carpeta resultante (por defecto: <code>[codigo] - [tipo de producto]</code>)
+                </label>
+                <div class="repo-preview-badge" id="repoFolderPreview">
+                  📁 <span id="previewFolderText">------ - N/A</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sección: Datos Obligatorios del Producto -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-step">2</span>
+              <div>
+                <h2 class="card-title">Datos Obligatorios de Identificación</h2>
+                <p class="card-desc">Campos requeridos por el sistema</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="grid-2">
+                <!-- Código de Producto -->
+                <div class="form-group">
+                  <div class="label-with-counter">
+                    <label for="codigoProducto" class="form-label required">
+                      Código de Producto
+                    </label>
+                    <span class="digit-counter" id="codeCounter">0/6 dígitos</span>
+                  </div>
+                  <input 
+                    type="text" 
+                    id="codigoProducto" 
+                    name="codigoProducto" 
+                    class="form-input text-mono font-bold" 
+                    placeholder="Ej. 104523" 
+                    maxlength="6"
+                    pattern="\d{6}"
+                    required
+                  >
+                  <span class="form-hint">6 dígitos exactos (sistema Memory Kings).</span>
+                </div>
+
+                <!-- Número de Parte -->
+                <div class="form-group">
+                  <label for="numeroParte" class="form-label required">
+                    Número de Parte
+                  </label>
+                  <input 
+                    type="text" 
+                    id="numeroParte" 
+                    name="numeroParte" 
+                    class="form-input text-mono" 
+                    placeholder="Ej. PVE2416G320C8K" 
+                    required
+                  >
+                  <span class="form-hint">Código o SKU del fabricante.</span>
+                </div>
+              </div>
+
+              <!-- Nombre de Producto -->
+              <div class="form-group">
+                <label for="nombreProducto" class="form-label required">
+                  Nombre de Producto (Sistema)
+                </label>
+                <input 
+                  type="text" 
+                  id="nombreProducto" 
+                  name="nombreProducto" 
+                  class="form-input font-medium" 
+                  placeholder="Ej. MEMORIA RAM DDR4 8GB 3200MHZ PATRIOT VIPER STEEL RGB" 
+                  required
+                >
+              </div>
+
+              <!-- Tipo de Producto / tipoxps -->
+              <div class="form-group mb-0">
+                <label for="tipoxps" class="form-label required">
+                  Tipo de Producto (tipoxps - Plantillas Photoshop)
+                </label>
+                <select id="tipoxps" name="tipoxps" class="form-select font-medium" required>
+                  <option value="" disabled selected>-- Seleccione Tipo de Producto --</option>
+                  <option value="MEMORIA-RAM">MEMORIA-RAM</option>
+                  <option value="DISCO-DURO-INTERNO">DISCO-DURO-INTERNO</option>
+                  <option value="PC MINI">PC mini</option>
+                  <option value="LAPTOP">Laptop</option>
+                  <option value="N/A">N/A</option>
+                </select>
+                <!-- Previsualización de los archivos PS a copiar -->
+                <div class="ps-templates-tags mt-2" id="psTemplatesContainer">
+                  <span class="text-muted text-xs">Seleccione un tipo para ver las plantillas asociadas.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sección: Datos Manuales Complementarios -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-step">3</span>
+              <div>
+                <h2 class="card-title">Datos Comerciales & Marca</h2>
+                <p class="card-desc">Clasificación para el catálogo y CMS</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="grid-2">
+                <!-- Marca -->
+                <div class="form-group">
+                  <label for="marca" class="form-label">
+                    Marca
+                  </label>
+                  <select id="marca" name="marca" class="form-select">
+                    <option value="">(Sin marca seleccionada)</option>
+                    <option value="WESTERN DIGITAL">WESTERN DIGITAL (WD)</option>
+                    <option value="PATRIOT">PATRIOT</option>
+                    <option value="ASUS">ASUS</option>
+                    <option value="GEEKOM">GEEKOM</option>
+                  </select>
+                </div>
+
+                <!-- Submarca -->
+                <div class="form-group">
+                  <label for="submarca" class="form-label">
+                    Submarca
+                  </label>
+                  <select id="submarca" name="submarca" class="form-select" disabled>
+                    <option value="">(Seleccione primero una marca)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Nombre Corto -->
+              <div class="form-group">
+                <div class="label-with-counter">
+                  <label for="nombreCorto" class="form-label">
+                    Nombre Corto (Sin indicar el tipo de producto)
+                  </label>
+                  <button type="button" class="btn-text-action" id="btnAutoShortName" title="Quitar el tipo del inicio del nombre">
+                    ⚡ Auto-sugerir
+                  </button>
+                </div>
+                <input 
+                  type="text" 
+                  id="nombreCorto" 
+                  name="nombreCorto" 
+                  class="form-input" 
+                  placeholder="Ej. DDR4 8GB 3200MHZ PATRIOT VIPER STEEL RGB"
+                >
+              </div>
+
+              <!-- Complemento de Nombre -->
+              <div class="form-group mb-0">
+                <label class="form-label">
+                  Complemento de Nombre (añadidos a la derecha del nombre)
+                </label>
+                <div class="pills-container" id="complementosPills">
+                  <!-- Pills generados por JS -->
+                </div>
+                <div class="input-with-button mt-2">
+                  <input type="text" id="customComplementoInput" class="form-input form-input-sm" placeholder="Agregar otro complemento (ej. Silver, 32GB)...">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnAddComplemento">
+                    + Añadir
+                  </button>
+                </div>
+                <div class="preview-full-name mt-2" id="previewFullName">
+                  <span class="text-muted text-xs">Nombre con complementos:</span>
+                  <span class="font-semibold text-sm" id="fullDisplayName">-</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sección: Enlaces & Videos -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-step">4</span>
+              <div>
+                <h2 class="card-title">Enlaces & Multimedia</h2>
+                <p class="card-desc">Cálculo automático de <code>link1</code> y <code>link2</code></p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="grid-2">
+                <div class="form-group">
+                  <label for="linkPdf" class="form-label">
+                    Link PDF del producto
+                  </label>
+                  <input 
+                    type="url" 
+                    id="linkPdf" 
+                    name="linkPdf" 
+                    class="form-input text-sm" 
+                    placeholder="https://.../datasheet.pdf"
+                  >
+                </div>
+
+                <div class="form-group">
+                  <label for="linkProducto" class="form-label">
+                    Link de producto (web oficial)
+                  </label>
+                  <input 
+                    type="url" 
+                    id="linkProducto" 
+                    name="linkProducto" 
+                    class="form-input text-sm" 
+                    placeholder="https://.../producto"
+                  >
+                </div>
+              </div>
+
+              <!-- Formula preview badges -->
+              <div class="links-formula-box mb-3">
+                <div class="formula-item">
+                  <span class="formula-tag">link1:</span>
+                  <span class="formula-val text-mono" id="previewLink1">#</span>
+                </div>
+                <div class="formula-item">
+                  <span class="formula-tag">link2:</span>
+                  <span class="formula-val text-mono" id="previewLink2">#</span>
+                </div>
+              </div>
+
+              <!-- Videos de YouTube -->
+              <div class="form-group mb-0">
+                <div class="label-with-counter">
+                  <label class="form-label">
+                    Videos de YouTube (<code>text[]</code>)
+                  </label>
+                  <button type="button" class="btn-text-action" id="btnAddVideo">
+                    + Agregar video
+                  </button>
+                </div>
+                <div id="videoInputsContainer" class="video-list">
+                  <!-- Entradas dinámicas de videos -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botones de Acción del Formulario -->
+          <div class="action-bar">
+            <button type="button" class="btn btn-secondary" id="btnResetForm">
+              🔄 Limpiar Formulario
+            </button>
+            <button type="submit" class="btn btn-primary btn-lg" id="btnSubmit">
+              🚀 Crear Repositorio <span class="kbd-hint">Ctrl + Enter</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Columna Derecha: Inspector en Tiempo Real -->
+      <section class="inspector-column">
+        <div class="inspector-card">
+          <!-- Pestañas del Inspector -->
+          <div class="inspector-tabs">
+            <button class="tab-btn active" data-tab="tab-json">
+              📄 JSON Generado (<span id="tabJsonCode">codigo.txt</span>)
+            </button>
+            <button class="tab-btn" data-tab="tab-tree">
+              📂 Estructura de Carpetas
+            </button>
+            <button class="tab-btn" data-tab="tab-history">
+              🕒 Historial (<span id="historyCount">0</span>)
+            </button>
+          </div>
+
+          <!-- Tab Content: JSON Preview -->
+          <div class="tab-content active" id="tab-json">
+            <div class="tab-toolbar">
+              <span class="text-xs text-muted" id="jsonStats">0 líneas • 0 bytes</span>
+              <button type="button" class="btn btn-secondary btn-sm" id="btnCopyJson">
+                📋 Copiar JSON
+              </button>
+            </div>
+            <pre class="json-viewer"><code id="jsonPreviewCode">{}</code></pre>
+          </div>
+
+          <!-- Tab Content: Tree View -->
+          <div class="tab-content" id="tab-tree">
+            <div class="tree-container" id="treePreviewContainer">
+              <!-- Renderizado interactivo del árbol -->
+            </div>
+          </div>
+
+          <!-- Tab Content: Historial Reciente -->
+          <div class="tab-content" id="tab-history">
+            <div class="history-list" id="historyListContainer">
+              <!-- Items del historial -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal de Éxito al Crear Repositorio -->
+    <div class="modal-backdrop" id="successModal">
+      <div class="modal-box">
+        <div class="modal-icon-success">✓</div>
+        <h3 class="modal-title">¡Repositorio Creado Exitosamente!</h3>
+        <p class="modal-desc" id="successModalDesc">El repositorio ha sido creado con todos sus archivos y carpetas.</p>
+
+        <div class="created-path-box">
+          <span class="text-xs text-muted">Ruta completa en disco:</span>
+          <div class="text-mono text-sm font-semibold select-all" id="createdRepoFullPath">-</div>
+        </div>
+
+        <div class="created-files-summary" id="createdFilesSummary">
+          <!-- Lista de archivos creados -->
+        </div>
+
+        <div id="modalWarningsContainer" class="warnings-box" style="display: none;">
+          <!-- Advertencias si las plantillas no estaban accesibles -->
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-primary btn-lg" id="btnOpenCreatedLocation">
+            📂 Abrir ubicación
+          </button>
+          <button type="button" class="btn btn-secondary" id="btnCloseSuccessModal">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de Configuración / Ajustes -->
+    <div class="modal-backdrop" id="settingsModal">
+      <div class="modal-box modal-box-lg">
+        <div class="modal-header-with-close">
+          <h3 class="modal-title">Configuración del Sistema</h3>
+          <button type="button" class="btn-close" id="btnCloseSettingsModal">✕</button>
+        </div>
+        
+        <form id="settingsForm">
+          <div class="form-group">
+            <label for="settingTemplatePath" class="form-label">
+              Ruta de Plantillas Photoshop (W:\)
+            </label>
+            <input type="text" id="settingTemplatePath" class="form-input text-mono" value="W:\PLANTILLAS_EDICION_LUIS" required>
+            <span class="form-hint">Carpeta donde están los archivos .psd originales.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="settingDownloadPath" class="form-label">
+              Carpeta Predeterminada de Descarga de Repositorios
+            </label>
+            <input type="text" id="settingDownloadPath" class="form-input text-mono" required>
+            <span class="form-hint">Ubicación donde se guardarán por defecto las carpetas generadas.</span>
+          </div>
+
+          <div class="mappings-editor">
+            <h4 class="text-sm font-bold mb-2">Mapeo de Plantillas por Tipo (tipoxps):</h4>
+            <div class="table-responsive">
+              <table class="simple-table" id="mappingsTable">
+                <thead>
+                  <tr>
+                    <th>Tipo (tipoxps)</th>
+                    <th>PS1</th>
+                    <th>PS2</th>
+                    <th>PS3</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Filas dinámicas -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="modal-actions mt-4">
+            <button type="submit" class="btn btn-primary">
+              💾 Guardar Configuración
+            </button>
+            <button type="button" class="btn btn-secondary" id="btnCancelSettings">
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toastNotification">Mensaje</div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
