@@ -111,7 +111,7 @@ Las plantillas se obtienen automáticamente del directorio de origen:
 1. **Botón "Abrir ubicación":**
    - Presente en la ventana modal de confirmación tras crear el repositorio.
    - Presente en cada elemento del **Historial Reciente**.
-   - Presente junto al campo del directorio base para comprobar rápidamente la ruta.
+   - Junto al campo del directorio base, el botón **Buscar** abre el selector estándar de Windows: navega hasta la carpeta deseada y pulsa **Abrir** para usarla. **Abrir** permite comprobar la ruta en el Explorador.
    - Abre de inmediato la carpeta en el Explorador de archivos de Windows (`explorer.exe`).
 
 2. **Inspector en tiempo real:**

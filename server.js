@@ -1,7 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const { exec } = require('child_process');
+const { exec, execFile } = require('child_process');
 
 const PORT = process.env.PORT || 3456;
 const CONFIG_FILE = path.join(__dirname, 'config.json');
@@ -216,6 +216,57 @@ function openInExplorer(targetPath) {
   });
 }
 
+function selectFolder(initialPath) {
+  if (process.platform !== 'win32') {
+    return Promise.reject(new Error('El selector de carpetas está disponible solo en Windows.'));
+  }
+
+  const script = [
+    "$ErrorActionPreference = 'Stop'",
+    'Add-Type -AssemblyName System.Windows.Forms',
+    '$dialog = New-Object System.Windows.Forms.OpenFileDialog',
+    "$dialog.Title = 'Selecciona la carpeta de destino de los repositorios y haz clic en Abrir'",
+    "$dialog.FileName = 'Seleccionar esta carpeta'",
+    '$dialog.CheckFileExists = $false',
+    '$dialog.CheckPathExists = $true',
+    '$dialog.ValidateNames = $false',
+    '$dialog.RestoreDirectory = $true',
+    'if ($env:PRODUCT_REPO_INITIAL_PATH -and [System.IO.Directory]::Exists($env:PRODUCT_REPO_INITIAL_PATH)) { $dialog.InitialDirectory = $env:PRODUCT_REPO_INITIAL_PATH }',
+    "if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) { $selectedPath = [System.IO.Path]::GetDirectoryName($dialog.FileName); [Console]::Out.Write([Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($selectedPath))) } else { [Console]::Out.Write('CANCELLED') }",
+    '$dialog.Dispose()'
+  ].join('\r\n');
+  const encodedScript = Buffer.from(script, 'utf16le').toString('base64');
+
+  return new Promise((resolve, reject) => {
+    execFile('powershell.exe', ['-NoProfile', '-STA', '-EncodedCommand', encodedScript], {
+      windowsHide: true,
+      env: {
+        ...process.env,
+        PRODUCT_REPO_INITIAL_PATH: typeof initialPath === 'string' ? initialPath : ''
+      }
+    }, (error, stdout, stderr) => {
+      if (error) {
+        return reject(new Error(stderr.trim() || `No se pudo abrir el selector de carpetas: ${error.message}`));
+      }
+
+      const result = stdout.trim();
+      if (result === 'CANCELLED') {
+        return resolve(null);
+      }
+
+      try {
+        const selectedPath = Buffer.from(result, 'base64').toString('utf8');
+        if (!selectedPath) {
+          return reject(new Error('El selector de carpetas no devolvió una ruta.'));
+        }
+        resolve(selectedPath);
+      } catch (decodeError) {
+        reject(new Error(`No se pudo leer la ruta seleccionada: ${decodeError.message}`));
+      }
+    });
+  });
+}
+
 const server = http.createServer(async (req, res) => {
   // Configuración de CORS para desarrollo local
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -272,6 +323,22 @@ const server = http.createServer(async (req, res) => {
       await openInExplorer(data.path);
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
       return res.end(JSON.stringify({ success: true }));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      return res.end(JSON.stringify({ success: false, error: err.message }));
+    }
+  }
+
+  if (url === '/api/select-folder' && req.method === 'POST') {
+    try {
+      const data = await parseJsonBody(req);
+      const selectedPath = await selectFolder(data.initialPath);
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      return res.end(JSON.stringify({
+        success: true,
+        cancelled: selectedPath === null,
+        path: selectedPath
+      }));
     } catch (err) {
       res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
       return res.end(JSON.stringify({ success: false, error: err.message }));

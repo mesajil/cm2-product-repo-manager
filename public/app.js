@@ -10,6 +10,7 @@ const state = {
 const dom = {
   form: document.getElementById('productForm'),
   downloadPath: document.getElementById('downloadPath'),
+  btnBrowseBaseFolder: document.getElementById('btnBrowseBaseFolder'),
   btnOpenBaseFolder: document.getElementById('btnOpenBaseFolder'),
   previewFolderText: document.getElementById('previewFolderText'),
   codigoProducto: document.getElementById('codigoProducto'),
@@ -577,6 +578,36 @@ dom.btnOpenBaseFolder.addEventListener('click', () => {
   const p = dom.downloadPath.value.trim();
   if (!p) return showToast('Ingrese una ruta válida');
   openFolderInWindows(p);
+});
+
+dom.btnBrowseBaseFolder.addEventListener('click', async () => {
+  const button = dom.btnBrowseBaseFolder;
+  button.disabled = true;
+  button.textContent = 'Buscando...';
+
+  try {
+    const res = await fetch('/api/select-folder', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ initialPath: dom.downloadPath.value.trim() })
+    });
+    const result = await res.json();
+
+    if (!res.ok || !result.success) {
+      showToast(`Error: ${result.error || 'No se pudo seleccionar la carpeta'}`);
+      return;
+    }
+    if (result.cancelled) return;
+
+    dom.downloadPath.value = result.path;
+    dom.downloadPath.dispatchEvent(new Event('input', { bubbles: true }));
+  } catch (err) {
+    console.error('Error seleccionando carpeta de destino:', err);
+    showToast('Error al abrir el selector de carpetas');
+  } finally {
+    button.disabled = false;
+    button.textContent = '📁 Buscar';
+  }
 });
 
 function openLinkInBrowser(input) {

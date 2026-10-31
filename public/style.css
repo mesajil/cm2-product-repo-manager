@@ -330,6 +330,7 @@ body {
 
 .input-with-button .form-input {
   flex: 1;
+  min-width: 0;
 }
 
 /* Repo preview badge */
