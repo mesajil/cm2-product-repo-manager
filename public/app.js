@@ -28,6 +28,8 @@ const dom = {
   fullDisplayName: document.getElementById('fullDisplayName'),
   linkPdf: document.getElementById('linkPdf'),
   linkProducto: document.getElementById('linkProducto'),
+  btnOpenPdfLink: document.getElementById('btnOpenPdfLink'),
+  btnOpenProductLink: document.getElementById('btnOpenProductLink'),
   previewLink1: document.getElementById('previewLink1'),
   previewLink2: document.getElementById('previewLink2'),
   videoInputsContainer: document.getElementById('videoInputsContainer'),
@@ -576,6 +578,35 @@ dom.btnOpenBaseFolder.addEventListener('click', () => {
   if (!p) return showToast('Ingrese una ruta válida');
   openFolderInWindows(p);
 });
+
+function openLinkInBrowser(input) {
+  const value = input.value.trim();
+  if (!value) {
+    showToast('Ingrese primero el enlace que desea verificar');
+    input.focus();
+    return;
+  }
+
+  let url;
+  try {
+    url = new URL(value);
+  } catch {
+    showToast('Ingrese un enlace válido que comience con http:// o https://');
+    input.focus();
+    return;
+  }
+
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+    showToast('Solo se pueden abrir enlaces HTTP o HTTPS');
+    input.focus();
+    return;
+  }
+
+  window.open(url.href, '_blank', 'noopener,noreferrer');
+}
+
+dom.btnOpenPdfLink.addEventListener('click', () => openLinkInBrowser(dom.linkPdf));
+dom.btnOpenProductLink.addEventListener('click', () => openLinkInBrowser(dom.linkProducto));
 
 // Pestañas del Inspector
 dom.tabBtns.forEach(btn => {
