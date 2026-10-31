@@ -72,5 +72,26 @@
     "White",
     "Blanco"
   ],
-  "history": []
+  "history": [
+    {
+      "id": "1793485559934",
+      "createdAt": "2026-10-31T22:25:59.934Z",
+      "codigo": "043252",
+      "nombre": "PC mini Core Ultra 9 285H GEEKOM Mini IT15 32/S1",
+      "tipoxps": "PC MINI",
+      "repoDir": "C:\\Users\\Memory Kings\\.gemini\\antigravity\\scratch\\repositorios\\043252 - PC MINI",
+      "repoName": "043252 - PC MINI",
+      "filesCount": 3
+    },
+    {
+      "id": "1793484955904",
+      "createdAt": "2026-10-31T22:15:55.907Z",
+      "codigo": "043251",
+      "nombre": "PC mini Core i3-12300HE GEEKOM Mini iT12 16/512",
+      "tipoxps": "PC MINI",
+      "repoDir": "C:\\Users\\Memory Kings\\.gemini\\antigravity\\scratch\\repositorios\\043251 - PC MINI",
+      "repoName": "043251 - PC MINI",
+      "filesCount": 3
+    }
+  ]
 }

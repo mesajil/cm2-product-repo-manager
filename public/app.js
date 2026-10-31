@@ -67,6 +67,31 @@ const dom = {
   toast: document.getElementById('toastNotification')
 };
 
+function trimManualTextInputs(form) {
+  const trimInput = (input) => {
+    if (input.id === 'customComplementoInput') return;
+
+    const trimmedValue = input.value.trim();
+    if (trimmedValue !== input.value) {
+      input.value = trimmedValue;
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  };
+
+  form.addEventListener('focusout', (event) => {
+    if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) {
+      trimInput(event.target);
+    }
+  });
+
+  form.addEventListener('submit', () => {
+    form.querySelectorAll('input, textarea').forEach(trimInput);
+  }, true);
+}
+
+trimManualTextInputs(dom.form);
+trimManualTextInputs(dom.settingsForm);
+
 // Notificación Toast
 function showToast(message, duration = 3000) {
   dom.toast.textContent = message;
@@ -182,8 +207,8 @@ function renderComplementos(list) {
 
 // Agregar complemento personalizado
 dom.btnAddComplemento.addEventListener('click', () => {
-  const val = dom.customComplementoInput.value.trim();
-  if (!val) return;
+  const val = dom.customComplementoInput.value;
+  if (!val.trim()) return;
   state.activeComplementos.add(val);
   if (state.config && !state.config.complementos.includes(val)) {
     state.config.complementos.push(val);
