@@ -60,7 +60,10 @@
       "2": "700x400"
     },
     "LAPTOP": {
-      "3": "700x400"
+      "1": "LAPTOP",
+      "2": "RESOLUCION",
+      "3": "700x400",
+      "4": "LAPTOP-PUERTOS"
     },
     "N/A": {
       "2": "700x400"
@@ -73,6 +76,16 @@
     "Blanco"
   ],
   "history": [
+    {
+      "id": "1793499211830",
+      "createdAt": "2026-11-01T02:13:31.831Z",
+      "codigo": "043256",
+      "nombre": "LAPTOP Core i7-14650HX ASUS TUF Gaming F16",
+      "tipoxps": "LAPTOP",
+      "repoDir": "C:\\Users\\Memory Kings\\.gemini\\antigravity\\scratch\\repositorios\\043256 - LAPTOP",
+      "repoName": "043256 - LAPTOP",
+      "filesCount": 5
+    },
     {
       "id": "1793486188598",
       "createdAt": "2026-10-31T22:36:28.598Z",

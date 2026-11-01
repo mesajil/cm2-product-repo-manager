@@ -74,6 +74,10 @@ Las plantillas se obtienen automáticamente del directorio de origen:
 | `MEMORIA-RAM` | PS2 | `700x400` | `2-700x400.psd` |
 | `DISCO-DURO-INTERNO` | PS1 | `DISCO-DURO-INTERNO` | `1-DISCO-DURO-INTERNO.psd` |
 | `DISCO-DURO-INTERNO` | PS2 | `700x400` | `2-700x400.psd` |
+| `LAPTOP` | PS1 | `LAPTOP` | `1-LAPTOP.psd` |
+| `LAPTOP` | PS2 | `RESOLUCION` | `2-RESOLUCION.psd` |
+| `LAPTOP` | PS3 | `700x400` | `3-700x400.psd` |
+| `LAPTOP` | PS4 | `LAPTOP-PUERTOS` | `4-LAPTOP-PUERTOS.psd` |
 | `N/A` | PS2 | `700x400` | `2-700x400.psd` |
 
 *(La ruta de origen `W:\PLANTILLAS_EDICION_LUIS` se puede cambiar o verificar directamente desde la interfaz en el botón **⚙️ Ajustes**).*

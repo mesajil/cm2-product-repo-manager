@@ -65,7 +65,7 @@ function loadConfig() {
       'MEMORIA-RAM': { '1': 'MEMORIA-RAM', '2': '700x400' },
       'DISCO-DURO-INTERNO': { '1': 'DISCO-DURO-INTERNO', '2': '700x400' },
       'PC MINI': { '1': 'PC MINI', '2': '700x400' },
-      'LAPTOP': { '3': '700x400' },
+      'LAPTOP': { '1': 'LAPTOP', '2': 'RESOLUCION', '3': '700x400', '4': 'LAPTOP-PUERTOS' },
       'N/A': { '2': '700x400' }
     },
     complementos: ['Black', 'Negro', 'White', 'Blanco'],

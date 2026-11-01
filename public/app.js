@@ -821,6 +821,7 @@ function renderMappingsTable(mappings) {
       <td><code>${slots['1'] ? `1-${slots['1']}.psd` : '-'}</code></td>
       <td><code>${slots['2'] ? `2-${slots['2']}.psd` : '-'}</code></td>
       <td><code>${slots['3'] ? `3-${slots['3']}.psd` : '-'}</code></td>
+      <td><code>${slots['4'] ? `4-${slots['4']}.psd` : '-'}</code></td>
     `;
     dom.mappingsTable.appendChild(tr);
   });
