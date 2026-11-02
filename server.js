@@ -111,6 +111,8 @@ function buildProductJson(data) {
     'codigo-producto': (data.codigoProducto || '').trim(),
     'numero-parte': (data.numeroParte || '').trim(),
     'nombre-producto': (data.nombreProducto || '').trim(),
+    'upbase-caracteristicas-tecnicas': (data.upbaseCaracteristicasTecnicas || '').trim(),
+    'upbase-nota-importante': (data.upbaseNotaImportante || '').trim(),
     'link-pdf': linkPdf,
     'link-producto': linkProducto,
     'videos': videos,

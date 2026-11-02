@@ -91,6 +91,8 @@ Las plantillas se obtienen automáticamente del directorio de origen:
 | `codigo-producto` | 6 dígitos fijos | Manual | **Sí** |
 | `numero-parte` | Texto | Manual | **Sí** |
 | `nombre-producto` | Texto | Manual | **Sí** |
+| `upbase-caracteristicas-tecnicas` | Texto | Manual (vacío si no se indica) | No |
+| `upbase-nota-importante` | Texto | Manual (vacío si no se indica) | No |
 | `link-pdf` | Texto | Manual | No (vacío si no se indica) |
 | `link-producto` | Texto | Manual | No (vacío si no se indica) |
 | `videos` | Array de textos | Manual (links de YouTube) | No (`[]` si no hay) |

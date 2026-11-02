@@ -18,6 +18,8 @@ const dom = {
   numeroParte: document.getElementById('numeroParte'),
   nombreProducto: document.getElementById('nombreProducto'),
   tipoxps: document.getElementById('tipoxps'),
+  upbaseCaracteristicasTecnicas: document.getElementById('upbaseCaracteristicasTecnicas'),
+  upbaseNotaImportante: document.getElementById('upbaseNotaImportante'),
   psTemplatesContainer: document.getElementById('psTemplatesContainer'),
   marca: document.getElementById('marca'),
   submarca: document.getElementById('submarca'),
@@ -306,6 +308,8 @@ dom.codigoProducto.addEventListener('input', (e) => {
   dom.numeroParte,
   dom.nombreProducto,
   dom.tipoxps,
+  dom.upbaseCaracteristicasTecnicas,
+  dom.upbaseNotaImportante,
   dom.submarca,
   dom.nombreCorto,
   dom.linkPdf,
@@ -322,6 +326,8 @@ function getFormData() {
   const parte = dom.numeroParte.value.trim();
   const nombre = dom.nombreProducto.value.trim();
   const tipoxps = dom.tipoxps.value;
+  const upbaseCaracteristicasTecnicas = dom.upbaseCaracteristicasTecnicas.value.trim();
+  const upbaseNotaImportante = dom.upbaseNotaImportante.value.trim();
   const marca = dom.marca.value;
   const submarca = dom.submarca.value;
   const nombreCorto = dom.nombreCorto.value.trim();
@@ -345,6 +351,8 @@ function getFormData() {
     parte,
     nombre,
     tipoxps,
+    upbaseCaracteristicasTecnicas,
+    upbaseNotaImportante,
     marca,
     submarca,
     nombreCorto,
@@ -363,6 +371,8 @@ function computeProductJson(data) {
     'codigo-producto': data.codigo || '',
     'numero-parte': data.parte || '',
     'nombre-producto': data.nombre || '',
+    'upbase-caracteristicas-tecnicas': data.upbaseCaracteristicasTecnicas || '',
+    'upbase-nota-importante': data.upbaseNotaImportante || '',
     'link-pdf': data.linkPdf || '',
     'link-producto': data.linkProducto || '',
     'videos': data.videos,
@@ -717,6 +727,8 @@ dom.form.addEventListener('submit', async (e) => {
       codigoProducto: data.codigo,
       numeroParte: data.parte,
       nombreProducto: data.nombre,
+      upbaseCaracteristicasTecnicas: data.upbaseCaracteristicasTecnicas,
+      upbaseNotaImportante: data.upbaseNotaImportante,
       linkPdf: data.linkPdf,
       linkProducto: data.linkProducto,
       videos: data.videos,

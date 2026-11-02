@@ -42,6 +42,8 @@ function testJsonFormulas() {
       'codigo-producto': (data.codigoProducto || '').trim(),
       'numero-parte': (data.numeroParte || '').trim(),
       'nombre-producto': (data.nombreProducto || '').trim(),
+      'upbase-caracteristicas-tecnicas': (data.upbaseCaracteristicasTecnicas || '').trim(),
+      'upbase-nota-importante': (data.upbaseNotaImportante || '').trim(),
       'link-pdf': linkPdf,
       'link-producto': linkProducto,
       'videos': videos,
@@ -79,7 +81,20 @@ function testJsonFormulas() {
   if (resA['link1'] !== 'https://datasheet.pdf') throw new Error('Caso A link1 falló');
   if (resA['link2'] !== 'https://datasheet.pdf') throw new Error('Caso A link2 falló');
   if (resA['posicion'] !== 1) throw new Error('Caso A posicion falló');
+  if (resA['upbase-caracteristicas-tecnicas'] !== '') throw new Error('El campo técnico opcional debe estar vacío por defecto');
+  if (resA['upbase-nota-importante'] !== '') throw new Error('La nota opcional debe estar vacía por defecto');
   console.log('   [OK] Caso A (Solo PDF): link1=PDF, link2=PDF');
+
+  const resOptionalFields = buildProductJson({
+    codigoProducto: '104523',
+    numeroParte: 'PVE2416G320C8K',
+    nombreProducto: 'MEMORIA RAM PATRIOT 8GB',
+    upbaseCaracteristicasTecnicas: '  Compatible con DDR4  ',
+    upbaseNotaImportante: '  Confirmar compatibilidad  '
+  });
+  if (resOptionalFields['upbase-caracteristicas-tecnicas'] !== 'Compatible con DDR4') throw new Error('Las características técnicas opcionales no se guardaron correctamente');
+  if (resOptionalFields['upbase-nota-importante'] !== 'Confirmar compatibilidad') throw new Error('La nota importante opcional no se guardó correctamente');
+  console.log('   [OK] Campos adicionales opcionales: conservan el contenido y eliminan espacios externos');
 
   // Caso B: Solo Producto
   const resB = buildProductJson({
@@ -150,6 +165,8 @@ function testDirectoryCreation() {
     'codigo-producto': codigo,
     'numero-parte': 'TEST-PART',
     'nombre-producto': 'TEST NAME',
+    'upbase-caracteristicas-tecnicas': '',
+    'upbase-nota-importante': '',
     'link-pdf': '',
     'link-producto': '',
     'videos': [],
