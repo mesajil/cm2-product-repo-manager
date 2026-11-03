@@ -53,7 +53,6 @@ Dentro de ella se generará la siguiente estructura exacta:
 │   └── [codigo].txt       # Contiene el JSON completo con todos los datos y fórmulas
 │
 ├── img/
-│   ├── img/               # Carpeta vacía para imágenes del producto
 │   └── mk/                # Carpeta vacía para marcas de agua / recursos MK
 │
 └── ps/                    # Copias de las plantillas de Photoshop requeridas

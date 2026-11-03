@@ -509,11 +509,6 @@ function renderFolderTreePreview(folderName, codigo, tipoxps) {
   imgDiv.innerHTML = `📁 <strong>img/</strong>`;
   container.appendChild(imgDiv);
 
-  const imgSubDiv = document.createElement('div');
-  imgSubDiv.className = 'tree-node tree-indent-2';
-  imgSubDiv.innerHTML = `📁 img/ <span class="tree-badge tree-badge-empty">vacía</span>`;
-  container.appendChild(imgSubDiv);
-
   const mkSubDiv = document.createElement('div');
   mkSubDiv.className = 'tree-node tree-indent-2';
   mkSubDiv.innerHTML = `📁 mk/ <span class="tree-badge tree-badge-empty">vacía</span>`;
@@ -803,7 +798,7 @@ dom.form.addEventListener('submit', async (e) => {
 
     dom.createdFilesSummary.innerHTML = `
       <div class="file-item-summary">📁 <strong>docs/</strong> &rarr; 📄 ${result.txtFile.split(/[\\/]/).pop()} (JSON generado)</div>
-      <div class="file-item-summary">📁 <strong>img/</strong> &rarr; img/ (vacía), mk/ (vacía)</div>
+      <div class="file-item-summary">📁 <strong>img/</strong> &rarr; mk/ (vacía)</div>
     `;
 
     if (result.copiedFiles && result.copiedFiles.length > 0) {

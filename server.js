@@ -459,16 +459,15 @@ const server = http.createServer(async (req, res) => {
 
       // Crear carpetas del repositorio:
       // 1. docs/
-      // 2. img/img/ y img/mk/
+      // 2. img/ con mk/
       // 3. ps/
       const docsDir = path.join(repoDir, 'docs');
       const imgDir = path.join(repoDir, 'img');
-      const imgSubDir = path.join(imgDir, 'img');
       const mkSubDir = path.join(imgDir, 'mk');
       const psDir = path.join(repoDir, 'ps');
 
       fs.mkdirSync(docsDir, { recursive: true });
-      fs.mkdirSync(imgSubDir, { recursive: true });
+      fs.mkdirSync(imgDir, { recursive: true });
       fs.mkdirSync(mkSubDir, { recursive: true });
       fs.mkdirSync(psDir, { recursive: true });
 

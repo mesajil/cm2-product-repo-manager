@@ -152,12 +152,11 @@ function testDirectoryCreation() {
 
   const docsDir = path.join(repoDir, 'docs');
   const imgDir = path.join(repoDir, 'img');
-  const imgSub = path.join(imgDir, 'img');
   const mkSub = path.join(imgDir, 'mk');
   const psDir = path.join(repoDir, 'ps');
 
   fs.mkdirSync(docsDir, { recursive: true });
-  fs.mkdirSync(imgSub, { recursive: true });
+  fs.mkdirSync(imgDir, { recursive: true });
   fs.mkdirSync(mkSub, { recursive: true });
   fs.mkdirSync(psDir, { recursive: true });
 
@@ -195,16 +194,17 @@ function testDirectoryCreation() {
 
   // Aserciones
   if (!fs.existsSync(path.join(docsDir, '104523.txt'))) throw new Error('docs/104523.txt no existe');
-  if (!fs.existsSync(imgSub)) throw new Error('img/img no existe');
+  if (!fs.existsSync(imgDir)) throw new Error('img/ no existe');
   if (!fs.existsSync(mkSub)) throw new Error('img/mk no existe');
-  if (fs.readdirSync(imgSub).length !== 0) throw new Error('img/img no está vacía');
+  const imgContents = fs.readdirSync(imgDir);
+  if (imgContents.length !== 1 || imgContents[0] !== 'mk') throw new Error('img/ debe contener únicamente mk/');
   if (fs.readdirSync(mkSub).length !== 0) throw new Error('img/mk no está vacía');
   if (!fs.existsSync(path.join(psDir, '1-MEMORIA-RAM.psd'))) throw new Error('ps/1-MEMORIA-RAM.psd no existe');
   if (!fs.existsSync(path.join(psDir, '2-700x400.psd'))) throw new Error('ps/2-700x400.psd no existe');
 
   console.log('   [OK] Estructura creada verificada al 100%:');
   console.log('        docs/104523.txt (JSON válido)');
-  console.log('        img/img/ (vacía)');
+  console.log('        img/');
   console.log('        img/mk/ (vacía)');
   console.log('        ps/1-MEMORIA-RAM.psd');
   console.log('        ps/2-700x400.psd');
