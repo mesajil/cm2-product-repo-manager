@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json'), 'utf8'));
 
 // Cargar server modules
 const serverCode = fs.readFileSync(path.join(__dirname, 'server.js'), 'utf8');
@@ -212,6 +213,30 @@ function testDirectoryCreation() {
   fs.rmSync(testBase, { recursive: true, force: true });
 }
 
+function testPcMiniMappings() {
+  console.log('3. Probando mapeo de plantillas PC MINI...');
+
+  const mappings = config.tipoxpsMappings['PC MINI'];
+  const expected = {
+    '1': 'PC MINI',
+    '2': 'PUERTOS',
+    '3': 'PUERTOS',
+    '4': '700x400'
+  };
+
+  if (JSON.stringify(mappings) !== JSON.stringify(expected)) {
+    throw new Error('El mapeo de plantillas PC MINI no coincide con las cuatro posiciones requeridas');
+  }
+
+  const outputFiles = Object.entries(mappings).map(([position, template]) => `${position}-${template}.psd`);
+  const expectedFiles = ['1-PC MINI.psd', '2-PUERTOS.psd', '3-PUERTOS.psd', '4-700x400.psd'];
+  if (JSON.stringify(outputFiles) !== JSON.stringify(expectedFiles)) {
+    throw new Error('Los nombres de archivo PS de PC MINI no se generan correctamente');
+  }
+  console.log('   [OK] PC MINI genera las cuatro posiciones PS requeridas');
+}
+
 testJsonFormulas();
 testDirectoryCreation();
+testPcMiniMappings();
 console.log('\n--- ¡TODAS LAS VALIDACIONES DE LÓGICA DE NEGOCIO PASARON CON ÉXITO! ---');

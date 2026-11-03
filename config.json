@@ -57,7 +57,9 @@
     },
     "PC MINI": {
       "1": "PC MINI",
-      "2": "700x400"
+      "2": "PUERTOS",
+      "3": "PUERTOS",
+      "4": "700x400"
     },
     "LAPTOP": {
       "1": "LAPTOP",
@@ -76,6 +78,26 @@
     "Blanco"
   ],
   "history": [
+    {
+      "id": "1793662681323",
+      "createdAt": "2026-11-02T23:38:01.324Z",
+      "codigo": "043253",
+      "nombre": "PC mini Ryzen 9 Mega AI Max+ 388 GEEKOM 64/1TB",
+      "tipoxps": "PC MINI",
+      "repoDir": "W:\\EDICION_CODIGOS\\2026-11\\02\\043253 - PC MINI",
+      "repoName": "043253 - PC MINI",
+      "filesCount": 5
+    },
+    {
+      "id": "1793655414482",
+      "createdAt": "2026-11-02T21:36:54.482Z",
+      "codigo": "043252",
+      "nombre": "PC mini Core Ultra 9 285H GEEKOM Mini IT15 32/S1",
+      "tipoxps": "PC MINI",
+      "repoDir": "W:\\EDICION_CODIGOS\\2026-11\\02\\043252 - PC MINI",
+      "repoName": "043252 - PC MINI",
+      "filesCount": 3
+    },
     {
       "id": "1793501347805",
       "createdAt": "2026-11-01T02:49:07.805Z",
