@@ -419,6 +419,22 @@ const server = http.createServer(async (req, res) => {
         }));
       }
 
+      if (!(data.nombreCorto || '').trim()) {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        return res.end(JSON.stringify({
+          success: false,
+          error: 'El nombre corto es obligatorio.'
+        }));
+      }
+
+      if (data.nombreCorto.trim().length > 30) {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        return res.end(JSON.stringify({
+          success: false,
+          error: 'El nombre corto no puede superar los 30 caracteres.'
+        }));
+      }
+
       const tipoxps = (data.tipoxps || '').trim();
       if (!tipoxps) {
         res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });

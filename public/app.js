@@ -24,6 +24,7 @@ const dom = {
   marca: document.getElementById('marca'),
   submarca: document.getElementById('submarca'),
   nombreCorto: document.getElementById('nombreCorto'),
+  nombreCortoHint: document.getElementById('nombreCortoHint'),
   btnAutoShortName: document.getElementById('btnAutoShortName'),
   complementosPills: document.getElementById('complementosPills'),
   customComplementoInput: document.getElementById('customComplementoInput'),
@@ -283,9 +284,25 @@ dom.btnAutoShortName.addEventListener('click', () => {
   }
 
   dom.nombreCorto.value = name;
+  updateShortNameHint();
   updateLivePreview();
-  showToast('Nombre corto auto-sugerido');
+  if (name.length > 30) {
+    showToast('El nombre corto supera los 30 caracteres. Debe corregirlo.');
+  } else {
+    showToast('Nombre corto auto-sugerido');
+  }
 });
+
+function updateShortNameHint() {
+  const length = dom.nombreCorto.value.length;
+  const exceedsLimit = length > 30;
+  dom.nombreCortoHint.textContent = exceedsLimit
+    ? `Tiene ${length}/30 caracteres. Corrija el nombre corto antes de continuar.`
+    : `Máximo 30 caracteres (${length}/30).`;
+  dom.nombreCortoHint.classList.toggle('invalid', exceedsLimit);
+}
+
+dom.nombreCorto.addEventListener('input', updateShortNameHint);
 
 // Validación y contador de 6 dígitos para código de producto
 dom.codigoProducto.addEventListener('input', (e) => {
@@ -709,6 +726,18 @@ dom.form.addEventListener('submit', async (e) => {
   if (!data.nombre) {
     showToast('El nombre de producto es obligatorio');
     dom.nombreProducto.focus();
+    return;
+  }
+
+  if (!data.nombreCorto) {
+    showToast('El nombre corto es obligatorio');
+    dom.nombreCorto.focus();
+    return;
+  }
+
+  if (data.nombreCorto.length > 30) {
+    showToast('El nombre corto supera los 30 caracteres. Debe corregirlo.');
+    dom.nombreCorto.focus();
     return;
   }
 

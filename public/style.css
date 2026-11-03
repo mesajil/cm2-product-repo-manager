@@ -302,6 +302,10 @@ body {
   margin-top: 4px;
 }
 
+.form-hint.invalid {
+  color: var(--accent-red);
+}
+
 .text-mono {
   font-family: var(--font-mono);
 }

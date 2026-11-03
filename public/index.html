@@ -232,7 +232,7 @@
               <!-- Nombre Corto -->
               <div class="form-group">
                 <div class="label-with-counter">
-                  <label for="nombreCorto" class="form-label">
+                  <label for="nombreCorto" class="form-label required">
                     Nombre Corto (Sin indicar el tipo de producto)
                   </label>
                   <button type="button" class="btn-text-action" id="btnAutoShortName" title="Quitar el tipo del inicio del nombre">
@@ -245,7 +245,10 @@
                   name="nombreCorto" 
                   class="form-input" 
                   placeholder="Ej. DDR4 8GB 3200MHZ PATRIOT VIPER STEEL RGB"
+                  maxlength="30"
+                  required
                 >
+                <span id="nombreCortoHint" class="form-hint" aria-live="polite">Máximo 30 caracteres (0/30).</span>
               </div>
 
               <!-- Complemento de Nombre -->

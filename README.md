@@ -110,7 +110,7 @@ Las plantillas se obtienen automáticamente del directorio de origen:
 | `tipoxps` | Opción | Manual | **Sí** |
 | `marca` | Opción | Manual (`WESTERN DIGITAL`, `PATRIOT`, etc.) | No |
 | `submarca` | Opción | Manual dependiente de la marca | No |
-| `nombre-corto` | Texto | Manual (con botón auto-sugerir) | No |
+| `nombre-corto` | Texto | Manual (con botón auto-sugerir), máximo 30 caracteres | **Sí** |
 | `complemento-nombre` | Array de opciones | Manual (`Black`, `Negro`, `White`, `Blanco`) | No |
 | `slogan` | Texto | Vacío (`""`) | No |
 | `meta-keywords` | Array de textos | Vacío (`[]`) | No |
