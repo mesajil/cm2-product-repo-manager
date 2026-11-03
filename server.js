@@ -1,6 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 const { exec, execFile } = require('child_process');
 
 const PORT = process.env.PORT || 3456;
@@ -115,6 +116,10 @@ function loadConfig() {
       'MOCHILA': { '1': 'MOCHILA', '2': '700x400' },
       'BOLSO': { '1': 'MOCHILA', '2': '700x400' },
       'N/A': { '2': '700x400' }
+    },
+    brandLogoMappings: {
+      'KLIP XTREME': { directory: 'MARCA', logos: ['KLIP XTREME'] },
+      'RAZER': { directory: 'MARCA', logos: ['RAZER', 'RAZER LOGO'] }
     },
     complementos: ['Black', 'Negro', 'White', 'Blanco'],
     history: []
@@ -315,6 +320,94 @@ function selectFolder(initialPath) {
       }
     });
   });
+}
+
+function processPhotoshopFiles(files, logoMapping) {
+  if (process.platform !== 'win32') {
+    return Promise.reject(new Error('La activación de logos requiere Windows y Photoshop.'));
+  }
+
+  const processorPath = path.join(__dirname, 'scripts', 'procesar_marcas.jsx');
+  if (!fs.existsSync(processorPath)) {
+    return Promise.reject(new Error(`No se encontró el procesador de Photoshop: ${processorPath}`));
+  }
+
+  let workDir;
+  try {
+    workDir = fs.mkdtempSync(path.join(os.tmpdir(), 'product-repo-ps-'));
+    const scriptPath = path.join(workDir, 'procesar_marcas.jsx');
+    const jobPath = path.join(workDir, 'job.json');
+    const statusPath = path.join(workDir, 'status.json');
+    const jobs = files.map(file => ({
+      psdPath: file.path,
+      directory: logoMapping.directory,
+      logos: logoMapping.logos
+    }));
+
+    fs.copyFileSync(processorPath, scriptPath);
+    fs.writeFileSync(jobPath, JSON.stringify({ jobs, statusPath }), 'utf8');
+
+    const escapedScriptPath = scriptPath.replace(/'/g, "''");
+    const powershellScript = [
+      "$ErrorActionPreference = 'Stop'",
+      '$app = New-Object -ComObject Photoshop.Application',
+      `$app.DoJavaScriptFile('${escapedScriptPath}')`
+    ].join('\r\n');
+    const encodedScript = Buffer.from(powershellScript, 'utf16le').toString('base64');
+
+    return new Promise((resolve, reject) => {
+      execFile('powershell.exe', ['-NoProfile', '-STA', '-NonInteractive', '-EncodedCommand', encodedScript], {
+        windowsHide: true,
+        timeout: 300000,
+        maxBuffer: 1024 * 1024
+      }, (error, stdout, stderr) => {
+        if (error) {
+          return reject(new Error(stderr.trim() || `No se pudo procesar los PSD con Photoshop: ${error.message}`));
+        }
+
+        try {
+          if (!fs.existsSync(statusPath)) {
+            return reject(new Error(stderr.trim() || 'Photoshop no devolvió el resultado del procesamiento de logos.'));
+          }
+
+          const statusText = fs.readFileSync(statusPath, 'utf8').replace(/^\uFEFF/, '');
+          const result = JSON.parse(statusText);
+          if (result.error) {
+            return reject(new Error(`Photoshop no pudo procesar los logos: ${result.error}`));
+          }
+          if (!Array.isArray(result.results) || result.results.length !== files.length) {
+            return reject(new Error('Photoshop devolvió un resultado incompleto al procesar los PSD.'));
+          }
+
+          const failed = result.results.find(item => item.status === 'error');
+          if (failed) {
+            const failedFile = files[failed.index];
+            const fileName = failedFile ? failedFile.name : 'uno de los archivos PSD';
+            return reject(new Error(`No se pudo procesar ${fileName}: ${failed.error}`));
+          }
+
+          resolve(result.results);
+        } catch (resultError) {
+          reject(resultError);
+        }
+      });
+    }).finally(() => {
+      try {
+        fs.rmSync(workDir, { recursive: true, force: true });
+      } catch (cleanupError) {
+        console.warn(`No se pudo limpiar el directorio temporal ${workDir}:`, cleanupError);
+      }
+    });
+  } catch (err) {
+    if (workDir) {
+      try {
+        fs.rmSync(workDir, { recursive: true, force: true });
+      } catch (cleanupError) {
+        console.warn(`No se pudo limpiar el directorio temporal ${workDir}:`, cleanupError);
+      }
+    }
+    return Promise.reject(err);
+  }
 }
 
 const server = http.createServer(async (req, res) => {
@@ -543,6 +636,26 @@ const server = http.createServer(async (req, res) => {
             status: 'placeholder'
           });
         }
+      }
+
+      const brandLogoMappings = config.brandLogoMappings || {};
+      const selectedBrand = Object.keys(brandLogoMappings)
+        .find(brand => brand.toUpperCase() === (data.marca || '').trim().toUpperCase());
+      const logoMapping = selectedBrand && brandLogoMappings[selectedBrand];
+      const copiedPsdFiles = copiedFiles.filter(file => file.status === 'copied');
+
+      if (logoMapping && copiedPsdFiles.length > 0) {
+        const processingResults = await processPhotoshopFiles(
+          copiedPsdFiles.map(file => ({
+            name: file.name,
+            path: path.join(psDir, file.name)
+          })),
+          logoMapping
+        );
+
+        processingResults.forEach((result, index) => {
+          copiedPsdFiles[index].logoProcessing = result.status;
+        });
       }
 
       // Registrar en historial reciente

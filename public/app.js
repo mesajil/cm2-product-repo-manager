@@ -804,7 +804,14 @@ dom.form.addEventListener('submit', async (e) => {
     if (result.copiedFiles && result.copiedFiles.length > 0) {
       result.copiedFiles.forEach(f => {
         const icon = f.status === 'copied' ? '🖼️' : '⚠️';
-        const note = f.status === 'copied' ? '(Copiado de W:\\)' : '(Generado como referencia)';
+        const logoNotes = {
+          processed: '(Copiado; logos activados según marca)',
+          'skipped-directory': '(Copiado sin cambios: no se encontró MARCA)',
+          'skipped-logo': '(Copiado sin cambios: no se encontró el logo de la marca)'
+        };
+        const note = f.status !== 'copied'
+          ? '(Generado como referencia)'
+          : logoNotes[f.logoProcessing] || '(Copiado de W:\\)';
         const row = document.createElement('div');
         row.className = 'file-item-summary';
         row.innerHTML = `${icon} <strong>ps/</strong> &rarr; ${f.name} <span class="text-xs text-muted">${note}</span>`;

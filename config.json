@@ -137,6 +137,21 @@
       "2": "700x400"
     }
   },
+  "brandLogoMappings": {
+    "KLIP XTREME": {
+      "directory": "MARCA",
+      "logos": [
+        "KLIP XTREME"
+      ]
+    },
+    "RAZER": {
+      "directory": "MARCA",
+      "logos": [
+        "RAZER",
+        "RAZER LOGO"
+      ]
+    }
+  },
   "complementos": [
     "Black",
     "Negro",
@@ -144,6 +159,46 @@
     "Blanco"
   ],
   "history": [
+    {
+      "id": "1793743783430",
+      "createdAt": "2026-11-03T22:09:43.431Z",
+      "codigo": "043271",
+      "nombre": "MOCHILA 15.6\" KLIP XTREME Aurum KNB-721 BLUE",
+      "tipoxps": "MOCHILA",
+      "repoDir": "W:\\EDICION_CODIGOS\\2026-11\\03\\043271 - MOCHILA",
+      "repoName": "043271 - MOCHILA",
+      "filesCount": 3
+    },
+    {
+      "id": "1793743540248",
+      "createdAt": "2026-11-03T22:05:40.248Z",
+      "codigo": "043269",
+      "nombre": "BOLSO 15.6\" KLIP XTREME KLB-851 Nomadia",
+      "tipoxps": "BOLSO",
+      "repoDir": "W:\\EDICION_CODIGOS\\2026-11\\03\\043269 - BOLSO",
+      "repoName": "043269 - BOLSO",
+      "filesCount": 3
+    },
+    {
+      "id": "1793743236484",
+      "createdAt": "2026-11-03T22:00:36.484Z",
+      "codigo": "043269",
+      "nombre": "BOLSO 15.6\" KLIP XTREME KLB-851 Nomadia",
+      "tipoxps": "BOLSO",
+      "repoDir": "C:\\Users\\Memory Kings\\.gemini\\antigravity\\scratch\\repositorios\\043269 - BOLSO",
+      "repoName": "043269 - BOLSO",
+      "filesCount": 3
+    },
+    {
+      "id": "1793742988515",
+      "createdAt": "2026-11-03T21:56:28.516Z",
+      "codigo": "043269",
+      "nombre": "BOLSO 15.6\" KLIP XTREME KLB-851 Nomadia",
+      "tipoxps": "BOLSO",
+      "repoDir": "W:\\EDICION_CODIGOS\\2026-11\\03\\043269 - BOLSO",
+      "repoName": "043269 - BOLSO",
+      "filesCount": 3
+    },
     {
       "id": "1793662681323",
       "createdAt": "2026-11-02T23:38:01.324Z",

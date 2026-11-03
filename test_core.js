@@ -367,6 +367,20 @@ function testRazerBrand() {
     throw new Error('RAZER debe tener RAZER como única submarca');
   }
 
+  const logoMappings = config.brandLogoMappings;
+  if (!logoMappings || JSON.stringify(logoMappings['KLIP XTREME']) !== JSON.stringify({
+    directory: 'MARCA',
+    logos: ['KLIP XTREME']
+  })) {
+    throw new Error('KLIP XTREME debe activar el logo correspondiente dentro de MARCA');
+  }
+  if (JSON.stringify(logoMappings.RAZER) !== JSON.stringify({
+    directory: 'MARCA',
+    logos: ['RAZER', 'RAZER LOGO']
+  })) {
+    throw new Error('RAZER debe activar ambos logos correspondientes dentro de MARCA');
+  }
+
   console.log('   [OK] RAZER ofrece RAZER como submarca');
 }
 
