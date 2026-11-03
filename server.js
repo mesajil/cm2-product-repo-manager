@@ -59,6 +59,16 @@ function loadConfig() {
         name: 'GEEKOM',
         keyword: '',
         subbrands: ['GEEKOM']
+      },
+      {
+        name: 'COUGAR',
+        keyword: '',
+        subbrands: [
+          'Cougar Componentes',
+          'Cougar Mesas',
+          'Cougar Perifericos',
+          'Cougar Sillas | Sofa'
+        ]
       }
     ],
     tipoxpsMappings: {
@@ -66,6 +76,7 @@ function loadConfig() {
       'DISCO-DURO-INTERNO': { '1': 'DISCO-DURO-INTERNO', '2': '700x400' },
       'PC MINI': { '1': 'PC MINI', '2': 'PUERTOS', '3': 'PUERTOS', '4': '700x400' },
       'LAPTOP': { '1': 'LAPTOP', '2': 'RESOLUCION', '3': '700x400', '4': 'LAPTOP-PUERTOS' },
+      'CASE': { '1': 'CASE', '2': '700x400' },
       'N/A': { '2': '700x400' }
     },
     complementos: ['Black', 'Negro', 'White', 'Blanco'],

@@ -236,7 +236,37 @@ function testPcMiniMappings() {
   console.log('   [OK] PC MINI genera las cuatro posiciones PS requeridas');
 }
 
+function testCougarBrandAndCaseMappings() {
+  console.log('4. Probando marca COUGAR y mapeo de plantillas CASE...');
+
+  const cougar = config.brands.find(brand => brand.name === 'COUGAR');
+  const expectedSubbrands = [
+    'Cougar Componentes',
+    'Cougar Mesas',
+    'Cougar Perifericos',
+    'Cougar Sillas | Sofa'
+  ];
+  if (!cougar || JSON.stringify(cougar.subbrands) !== JSON.stringify(expectedSubbrands)) {
+    throw new Error('Las submarcas COUGAR no coinciden con las requeridas');
+  }
+
+  const caseMappings = config.tipoxpsMappings.CASE;
+  const expectedCaseMappings = { '1': 'CASE', '2': '700x400' };
+  if (JSON.stringify(caseMappings) !== JSON.stringify(expectedCaseMappings)) {
+    throw new Error('El mapeo de plantillas CASE no coincide con las dos posiciones requeridas');
+  }
+
+  const outputFiles = Object.entries(caseMappings).map(([position, template]) => `${position}-${template}.psd`);
+  const expectedFiles = ['1-CASE.psd', '2-700x400.psd'];
+  if (JSON.stringify(outputFiles) !== JSON.stringify(expectedFiles)) {
+    throw new Error('Los nombres de archivo PS de CASE no se generan correctamente');
+  }
+
+  console.log('   [OK] COUGAR ofrece cuatro submarcas y CASE genera sus dos archivos PS');
+}
+
 testJsonFormulas();
 testDirectoryCreation();
 testPcMiniMappings();
+testCougarBrandAndCaseMappings();
 console.log('\n--- ¡TODAS LAS VALIDACIONES DE LÓGICA DE NEGOCIO PASARON CON ÉXITO! ---');
