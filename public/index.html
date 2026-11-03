@@ -201,11 +201,11 @@
               <div class="grid-2">
                 <!-- Marca -->
                 <div class="form-group">
-                  <label for="marca" class="form-label">
+                  <label for="marca" class="form-label required">
                     Marca
                   </label>
-                  <select id="marca" name="marca" class="form-select">
-                    <option value="">(Sin marca seleccionada)</option>
+                  <select id="marca" name="marca" class="form-select" required>
+                    <option value="">(Seleccione una marca)</option>
                     <option value="WESTERN DIGITAL">WESTERN DIGITAL (WD)</option>
                     <option value="PATRIOT">PATRIOT</option>
                     <option value="ASUS">ASUS</option>
@@ -216,10 +216,10 @@
 
                 <!-- Submarca -->
                 <div class="form-group">
-                  <label for="submarca" class="form-label">
+                  <label for="submarca" class="form-label required">
                     Submarca
                   </label>
-                  <select id="submarca" name="submarca" class="form-select" disabled>
+                  <select id="submarca" name="submarca" class="form-select" required disabled>
                     <option value="">(Seleccione primero una marca)</option>
                   </select>
                 </div>

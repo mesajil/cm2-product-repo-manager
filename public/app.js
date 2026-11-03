@@ -150,7 +150,7 @@ async function loadServerConfig() {
 // Renderizar select de marcas
 function renderBrandsSelect(brands) {
   if (!brands) return;
-  dom.marca.innerHTML = '<option value="">(Sin marca seleccionada)</option>';
+  dom.marca.innerHTML = '<option value="">(Seleccione una marca)</option>';
   brands.forEach(b => {
     const opt = document.createElement('option');
     opt.value = b.name;
@@ -174,7 +174,7 @@ dom.marca.addEventListener('change', () => {
   const brandObj = state.config.brands.find(b => b.name === selectedBrandName);
   if (brandObj && brandObj.subbrands && brandObj.subbrands.length > 0) {
     dom.submarca.disabled = false;
-    dom.submarca.innerHTML = '<option value="">(Seleccionar submarca opcional)</option>';
+    dom.submarca.innerHTML = '<option value="">(Seleccione una submarca)</option>';
     brandObj.subbrands.forEach(sub => {
       const opt = document.createElement('option');
       opt.value = sub;
