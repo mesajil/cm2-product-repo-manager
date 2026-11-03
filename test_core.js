@@ -303,9 +303,42 @@ function testSamsungBrandAndMonitorMappings() {
   console.log('   [OK] SAMSUNG ofrece nueve submarcas y MONITOR genera sus tres archivos PS');
 }
 
+function testKlipXtremeBrandAndWallChargerMappings() {
+  console.log('6. Probando marca KLIP XTREME y mapeo CARGADOR-DE-PARED...');
+
+  const klipXtreme = config.brands.find(brand => brand.name === 'KLIP XTREME');
+  const expectedSubbrands = [
+    'Klip Xtreme Accesorios para Laptop, Smartphone',
+    'Klip Xtreme Accesorios, Perifericos',
+    'Klip Xtreme Cargadores, Power Bank',
+    'Klip Xtreme Ecran',
+    'Klip Xtreme Empresarial',
+    'Klip Xtreme Mochilas Maletines',
+    'Klip Xtreme Soportes, Rack'
+  ];
+  if (!klipXtreme || JSON.stringify(klipXtreme.subbrands) !== JSON.stringify(expectedSubbrands)) {
+    throw new Error('Las submarcas KLIP XTREME no coinciden con las requeridas');
+  }
+
+  const chargerMappings = config.tipoxpsMappings['CARGADOR-DE-PARED'];
+  const expectedChargerMappings = { '1': 'CARGADOR-DE-PARED', '2': '700x400' };
+  if (JSON.stringify(chargerMappings) !== JSON.stringify(expectedChargerMappings)) {
+    throw new Error('El mapeo de CARGADOR-DE-PARED no coincide con las dos posiciones requeridas');
+  }
+
+  const outputFiles = Object.entries(chargerMappings).map(([position, template]) => `${position}-${template}.psd`);
+  const expectedFiles = ['1-CARGADOR-DE-PARED.psd', '2-700x400.psd'];
+  if (JSON.stringify(outputFiles) !== JSON.stringify(expectedFiles)) {
+    throw new Error('Los nombres de archivo PS de CARGADOR-DE-PARED no se generan correctamente');
+  }
+
+  console.log('   [OK] KLIP XTREME ofrece siete submarcas y CARGADOR-DE-PARED genera dos archivos PS');
+}
+
 testJsonFormulas();
 testDirectoryCreation();
 testPcMiniMappings();
 testCougarBrandAndCaseMappings();
 testSamsungBrandAndMonitorMappings();
+testKlipXtremeBrandAndWallChargerMappings();
 console.log('\n--- ¡TODAS LAS VALIDACIONES DE LÓGICA DE NEGOCIO PASARON CON ÉXITO! ---');

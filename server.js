@@ -84,6 +84,19 @@ function loadConfig() {
           'SAMSUNG Tablet Galaxy',
           'SAMSUNG Unidades SSD'
         ]
+      },
+      {
+        name: 'KLIP XTREME',
+        keyword: '',
+        subbrands: [
+          'Klip Xtreme Accesorios para Laptop, Smartphone',
+          'Klip Xtreme Accesorios, Perifericos',
+          'Klip Xtreme Cargadores, Power Bank',
+          'Klip Xtreme Ecran',
+          'Klip Xtreme Empresarial',
+          'Klip Xtreme Mochilas Maletines',
+          'Klip Xtreme Soportes, Rack'
+        ]
       }
     ],
     tipoxpsMappings: {
@@ -93,6 +106,7 @@ function loadConfig() {
       'LAPTOP': { '1': 'LAPTOP', '2': 'RESOLUCION', '3': '700x400', '4': 'LAPTOP-PUERTOS' },
       'CASE': { '1': 'CASE', '2': '700x400' },
       'MONITOR': { '1': 'MONITOR', '2': 'PUERTOS-MONITOR', '3': '700x400' },
+      'CARGADOR-DE-PARED': { '1': 'CARGADOR-DE-PARED', '2': '700x400' },
       'N/A': { '2': '700x400' }
     },
     complementos: ['Black', 'Negro', 'White', 'Blanco'],
