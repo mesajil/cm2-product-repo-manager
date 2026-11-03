@@ -84,6 +84,9 @@ Las plantillas se obtienen automáticamente del directorio de origen:
 | `LAPTOP` | PS4 | `LAPTOP-PUERTOS` | `4-LAPTOP-PUERTOS.psd` |
 | `CASE` | PS1 | `CASE` | `1-CASE.psd` |
 | `CASE` | PS2 | `700x400` | `2-700x400.psd` |
+| `MONITOR` | PS1 | `MONITOR` | `1-MONITOR.psd` |
+| `MONITOR` | PS2 | `PUERTOS-MONITOR` | `2-PUERTOS-MONITOR.psd` |
+| `MONITOR` | PS3 | `700x400` | `3-700x400.psd` |
 | `N/A` | PS2 | `700x400` | `2-700x400.psd` |
 
 *(La ruta de origen `W:\PLANTILLAS_EDICION_LUIS` se puede cambiar o verificar directamente desde la interfaz en el botón **⚙️ Ajustes**).*

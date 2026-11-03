@@ -265,8 +265,47 @@ function testCougarBrandAndCaseMappings() {
   console.log('   [OK] COUGAR ofrece cuatro submarcas y CASE genera sus dos archivos PS');
 }
 
+function testSamsungBrandAndMonitorMappings() {
+  console.log('5. Probando marca SAMSUNG y mapeo de plantillas MONITOR...');
+
+  const samsung = config.brands.find(brand => brand.name === 'SAMSUNG');
+  const expectedSubbrands = [
+    'SAMSUNG Monitores Gaming Odyssey',
+    'SAMSUNG Monitores Smart',
+    'SAMSUNG Monitores WorkPro',
+    'SAMSUNG Pantallas (Digital Signage)',
+    'SAMSUNG Pantallas Pizarras',
+    'SAMSUNG Perifericos',
+    'SAMSUNG SmartPhone Galaxy',
+    'SAMSUNG Tablet Galaxy',
+    'SAMSUNG Unidades SSD'
+  ];
+  if (!samsung || JSON.stringify(samsung.subbrands) !== JSON.stringify(expectedSubbrands)) {
+    throw new Error('Las submarcas SAMSUNG no coinciden con las requeridas');
+  }
+
+  const monitorMappings = config.tipoxpsMappings.MONITOR;
+  const expectedMonitorMappings = {
+    '1': 'MONITOR',
+    '2': 'PUERTOS-MONITOR',
+    '3': '700x400'
+  };
+  if (JSON.stringify(monitorMappings) !== JSON.stringify(expectedMonitorMappings)) {
+    throw new Error('El mapeo de plantillas MONITOR no coincide con las tres posiciones requeridas');
+  }
+
+  const outputFiles = Object.entries(monitorMappings).map(([position, template]) => `${position}-${template}.psd`);
+  const expectedFiles = ['1-MONITOR.psd', '2-PUERTOS-MONITOR.psd', '3-700x400.psd'];
+  if (JSON.stringify(outputFiles) !== JSON.stringify(expectedFiles)) {
+    throw new Error('Los nombres de archivo PS de MONITOR no se generan correctamente');
+  }
+
+  console.log('   [OK] SAMSUNG ofrece nueve submarcas y MONITOR genera sus tres archivos PS');
+}
+
 testJsonFormulas();
 testDirectoryCreation();
 testPcMiniMappings();
 testCougarBrandAndCaseMappings();
+testSamsungBrandAndMonitorMappings();
 console.log('\n--- ¡TODAS LAS VALIDACIONES DE LÓGICA DE NEGOCIO PASARON CON ÉXITO! ---');

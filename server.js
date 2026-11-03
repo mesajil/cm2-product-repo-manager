@@ -69,6 +69,21 @@ function loadConfig() {
           'Cougar Perifericos',
           'Cougar Sillas | Sofa'
         ]
+      },
+      {
+        name: 'SAMSUNG',
+        keyword: '',
+        subbrands: [
+          'SAMSUNG Monitores Gaming Odyssey',
+          'SAMSUNG Monitores Smart',
+          'SAMSUNG Monitores WorkPro',
+          'SAMSUNG Pantallas (Digital Signage)',
+          'SAMSUNG Pantallas Pizarras',
+          'SAMSUNG Perifericos',
+          'SAMSUNG SmartPhone Galaxy',
+          'SAMSUNG Tablet Galaxy',
+          'SAMSUNG Unidades SSD'
+        ]
       }
     ],
     tipoxpsMappings: {
@@ -77,6 +92,7 @@ function loadConfig() {
       'PC MINI': { '1': 'PC MINI', '2': 'PUERTOS', '3': 'PUERTOS', '4': '700x400' },
       'LAPTOP': { '1': 'LAPTOP', '2': 'RESOLUCION', '3': '700x400', '4': 'LAPTOP-PUERTOS' },
       'CASE': { '1': 'CASE', '2': '700x400' },
+      'MONITOR': { '1': 'MONITOR', '2': 'PUERTOS-MONITOR', '3': '700x400' },
       'N/A': { '2': '700x400' }
     },
     complementos: ['Black', 'Negro', 'White', 'Blanco'],

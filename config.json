@@ -54,6 +54,21 @@
         "Cougar Perifericos",
         "Cougar Sillas | Sofa"
       ]
+    },
+    {
+      "name": "SAMSUNG",
+      "keyword": "",
+      "subbrands": [
+        "SAMSUNG Monitores Gaming Odyssey",
+        "SAMSUNG Monitores Smart",
+        "SAMSUNG Monitores WorkPro",
+        "SAMSUNG Pantallas (Digital Signage)",
+        "SAMSUNG Pantallas Pizarras",
+        "SAMSUNG Perifericos",
+        "SAMSUNG SmartPhone Galaxy",
+        "SAMSUNG Tablet Galaxy",
+        "SAMSUNG Unidades SSD"
+      ]
     }
   ],
   "tipoxpsMappings": {
@@ -80,6 +95,11 @@
     "CASE": {
       "1": "CASE",
       "2": "700x400"
+    },
+    "MONITOR": {
+      "1": "MONITOR",
+      "2": "PUERTOS-MONITOR",
+      "3": "700x400"
     },
     "N/A": {
       "2": "700x400"
