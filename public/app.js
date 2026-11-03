@@ -304,6 +304,20 @@ function updateShortNameHint() {
 
 dom.nombreCorto.addEventListener('input', updateShortNameHint);
 
+function clearShortNameAfterSourceChange() {
+  dom.nombreCorto.value = '';
+  updateShortNameHint();
+  updateLivePreview();
+}
+
+[
+  dom.nombreProducto,
+  dom.tipoxps
+].forEach(el => {
+  el.addEventListener('input', clearShortNameAfterSourceChange);
+  el.addEventListener('change', clearShortNameAfterSourceChange);
+});
+
 // Validación y contador de 6 dígitos para código de producto
 dom.codigoProducto.addEventListener('input', (e) => {
   // Limpiar no numéricos
@@ -323,8 +337,6 @@ dom.codigoProducto.addEventListener('input', (e) => {
 // Escuchadores de eventos para actualización reactiva
 [
   dom.numeroParte,
-  dom.nombreProducto,
-  dom.tipoxps,
   dom.upbaseCaracteristicasTecnicas,
   dom.upbaseNotaImportante,
   dom.submarca,
@@ -699,6 +711,7 @@ dom.btnResetForm.addEventListener('click', () => {
     dom.codeCounter.className = 'digit-counter';
     dom.submarca.innerHTML = '<option value="">(Seleccione primero una marca)</option>';
     dom.submarca.disabled = true;
+    updateShortNameHint();
     updateLivePreview();
     showToast('Formulario restablecido');
   }
