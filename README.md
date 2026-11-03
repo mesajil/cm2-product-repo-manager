@@ -89,6 +89,10 @@ Las plantillas se obtienen automáticamente del directorio de origen:
 | `MONITOR` | PS3 | `700x400` | `3-700x400.psd` |
 | `CARGADOR-DE-PARED` | PS1 | `CARGADOR-DE-PARED` | `1-CARGADOR-DE-PARED.psd` |
 | `CARGADOR-DE-PARED` | PS2 | `700x400` | `2-700x400.psd` |
+| `MOCHILA` | PS1 | `MOCHILA` | `1-MOCHILA.psd` |
+| `MOCHILA` | PS2 | `700x400` | `2-700x400.psd` |
+| `BOLSO` | PS1 | `MOCHILA` | `1-MOCHILA.psd` |
+| `BOLSO` | PS2 | `700x400` | `2-700x400.psd` |
 | `N/A` | PS2 | `700x400` | `2-700x400.psd` |
 
 *(La ruta de origen `W:\PLANTILLAS_EDICION_LUIS` se puede cambiar o verificar directamente desde la interfaz en el botón **⚙️ Ajustes**).*

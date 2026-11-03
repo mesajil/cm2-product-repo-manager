@@ -107,6 +107,8 @@ function loadConfig() {
       'CASE': { '1': 'CASE', '2': '700x400' },
       'MONITOR': { '1': 'MONITOR', '2': 'PUERTOS-MONITOR', '3': '700x400' },
       'CARGADOR-DE-PARED': { '1': 'CARGADOR-DE-PARED', '2': '700x400' },
+      'MOCHILA': { '1': 'MOCHILA', '2': '700x400' },
+      'BOLSO': { '1': 'MOCHILA', '2': '700x400' },
       'N/A': { '2': '700x400' }
     },
     complementos: ['Black', 'Negro', 'White', 'Blanco'],

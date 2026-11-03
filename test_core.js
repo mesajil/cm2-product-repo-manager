@@ -335,10 +335,35 @@ function testKlipXtremeBrandAndWallChargerMappings() {
   console.log('   [OK] KLIP XTREME ofrece siete submarcas y CARGADOR-DE-PARED genera dos archivos PS');
 }
 
+function testBackpackAndBagMappings() {
+  console.log('7. Probando mapeos MOCHILA y BOLSO...');
+
+  const expectedFilesByType = {
+    'MOCHILA': ['1-MOCHILA.psd', '2-700x400.psd'],
+    'BOLSO': ['1-MOCHILA.psd', '2-700x400.psd']
+  };
+
+  for (const [type, expectedFiles] of Object.entries(expectedFilesByType)) {
+    const mappings = config.tipoxpsMappings[type];
+    const expectedMappings = { '1': 'MOCHILA', '2': '700x400' };
+    if (JSON.stringify(mappings) !== JSON.stringify(expectedMappings)) {
+      throw new Error(`El mapeo de ${type} no coincide con las dos posiciones requeridas`);
+    }
+
+    const outputFiles = Object.entries(mappings).map(([position, template]) => `${position}-${template}.psd`);
+    if (JSON.stringify(outputFiles) !== JSON.stringify(expectedFiles)) {
+      throw new Error(`Los nombres de archivo PS de ${type} no se generan correctamente`);
+    }
+  }
+
+  console.log('   [OK] MOCHILA y BOLSO generan sus dos archivos PS');
+}
+
 testJsonFormulas();
 testDirectoryCreation();
 testPcMiniMappings();
 testCougarBrandAndCaseMappings();
 testSamsungBrandAndMonitorMappings();
 testKlipXtremeBrandAndWallChargerMappings();
+testBackpackAndBagMappings();
 console.log('\n--- ¡TODAS LAS VALIDACIONES DE LÓGICA DE NEGOCIO PASARON CON ÉXITO! ---');
