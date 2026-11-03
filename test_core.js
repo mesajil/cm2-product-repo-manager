@@ -359,6 +359,17 @@ function testBackpackAndBagMappings() {
   console.log('   [OK] MOCHILA y BOLSO generan sus dos archivos PS');
 }
 
+function testRazerBrand() {
+  console.log('8. Probando marca RAZER...');
+
+  const razer = config.brands.find(brand => brand.name === 'RAZER');
+  if (!razer || JSON.stringify(razer.subbrands) !== JSON.stringify(['RAZER'])) {
+    throw new Error('RAZER debe tener RAZER como única submarca');
+  }
+
+  console.log('   [OK] RAZER ofrece RAZER como submarca');
+}
+
 testJsonFormulas();
 testDirectoryCreation();
 testPcMiniMappings();
@@ -366,4 +377,5 @@ testCougarBrandAndCaseMappings();
 testSamsungBrandAndMonitorMappings();
 testKlipXtremeBrandAndWallChargerMappings();
 testBackpackAndBagMappings();
+testRazerBrand();
 console.log('\n--- ¡TODAS LAS VALIDACIONES DE LÓGICA DE NEGOCIO PASARON CON ÉXITO! ---');

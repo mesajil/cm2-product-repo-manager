@@ -97,6 +97,11 @@ function loadConfig() {
           'Klip Xtreme Mochilas Maletines',
           'Klip Xtreme Soportes, Rack'
         ]
+      },
+      {
+        name: 'RAZER',
+        keyword: '',
+        subbrands: ['RAZER']
       }
     ],
     tipoxpsMappings: {
