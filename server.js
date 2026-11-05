@@ -125,7 +125,8 @@ function loadConfig() {
     },
     brandLogoMappings: {
       'KLIP XTREME': { directory: 'MARCA', logos: ['KLIP XTREME'] },
-      'RAZER': { directory: 'MARCA', logos: ['RAZER', 'RAZER LOGO'] }
+      'RAZER': { directory: 'MARCA', logos: ['RAZER', 'RAZER LOGO'] },
+      'SANDISK': { directory: 'MARCA', logos: ['SANDISK'] }
     },
     complementos: ['Black', 'Negro', 'White', 'Blanco'],
     history: []

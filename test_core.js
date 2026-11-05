@@ -404,7 +404,13 @@ function testSanDiskBrandAndMicroSdMappings() {
     throw new Error('Los nombres de archivo PS de MEMORIA-MICRO-SD no se generan correctamente');
   }
 
-  console.log('   [OK] SANDISK y MEMORIA-MICRO-SD tienen la configuración requerida');
+  const logoMapping = config.brandLogoMappings.SANDISK;
+  const expectedLogoMapping = { directory: 'MARCA', logos: ['SANDISK'] };
+  if (JSON.stringify(logoMapping) !== JSON.stringify(expectedLogoMapping)) {
+    throw new Error('SANDISK debe activar su logo dentro del directorio MARCA');
+  }
+
+  console.log('   [OK] SANDISK activa su logo en MARCA y MEMORIA-MICRO-SD genera sus dos archivos PS');
 }
 
 testJsonFormulas();

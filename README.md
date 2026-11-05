@@ -100,7 +100,7 @@ Las plantillas se obtienen automáticamente del directorio de origen:
 
 ### Activación automática de logos
 
-Al generar un repositorio para **KLIP XTREME** o **RAZER**, la aplicación procesa las copias de los PSD mediante Photoshop COM, sin mostrar diálogos de Photoshop. Dentro del grupo `MARCA`, activa `KLIP XTREME` para esa marca; para `RAZER`, activa `RAZER` y `RAZER LOGO`. Los demás elementos directos de `MARCA` se desactivan. Si falta el grupo o ninguno de los logos configurados está presente, la copia se conserva sin cambios. Las demás marcas se copian sin procesamiento de logos.
+Al generar un repositorio para **KLIP XTREME**, **RAZER** o **SANDISK**, la aplicación procesa las copias de los PSD mediante Photoshop COM, sin mostrar diálogos de Photoshop. Dentro del grupo `MARCA`, activa `KLIP XTREME` para esa marca; para `RAZER`, activa `RAZER` y `RAZER LOGO`; y para `SANDISK`, activa `SANDISK`. Los demás elementos directos de `MARCA` se desactivan. Si falta el grupo o ninguno de los logos configurados está presente, la copia se conserva sin cambios. Las demás marcas se copian sin procesamiento de logos.
 
 ---
 

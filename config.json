@@ -161,6 +161,12 @@
         "RAZER",
         "RAZER LOGO"
       ]
+    },
+    "SANDISK": {
+      "directory": "MARCA",
+      "logos": [
+        "SANDISK"
+      ]
     }
   },
   "complementos": [
@@ -170,6 +176,16 @@
     "Blanco"
   ],
   "history": [
+    {
+      "id": "1793896699697",
+      "createdAt": "2026-11-05T16:38:19.697Z",
+      "codigo": "043274",
+      "nombre": "MEMORIA micro SD 64GB SANDISK Extreme Go",
+      "tipoxps": "MEMORIA-MICRO-SD",
+      "repoDir": "W:\\EDICION_CODIGOS\\2026-11\\05\\043274 - MEMORIA-MICRO-SD",
+      "repoName": "043274 - MEMORIA-MICRO-SD",
+      "filesCount": 3
+    },
     {
       "id": "1793801642874",
       "createdAt": "2026-11-04T14:14:02.874Z",
