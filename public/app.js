@@ -446,7 +446,7 @@ function updateLivePreview() {
   }
 
   // 4. Previsualización de plantillas Photoshop asociadas
-  renderPsTemplatesPreview(data.tipoxps);
+  renderPsTemplatesPreview(data.tipoxps, data.codigo);
 
   // 5. Previsualización de JSON en inspector
   dom.tabJsonCode.textContent = data.codigo ? `${data.codigo}.txt` : 'codigo.txt';
@@ -462,7 +462,7 @@ function updateLivePreview() {
 }
 
 // Renderizar previsualización de plantillas PS
-function renderPsTemplatesPreview(tipo) {
+function renderPsTemplatesPreview(tipo, codigo) {
   dom.psTemplatesContainer.innerHTML = '';
   if (!tipo || !state.config) return;
 
@@ -477,7 +477,10 @@ function renderPsTemplatesPreview(tipo) {
   entries.forEach(([pos, name]) => {
     const tag = document.createElement('span');
     tag.className = 'ps-tag';
-    tag.innerHTML = `🖼️ <strong>PS${pos}:</strong> ${pos}-${name}.psd`;
+    const fileName = pos === '1'
+      ? `1-mk${codigo || '[codigo]'}-a.psd`
+      : `${pos}-${name}.psd`;
+    tag.innerHTML = `🖼️ <strong>PS${pos}:</strong> ${fileName}`;
     dom.psTemplatesContainer.appendChild(tag);
   });
 }
@@ -532,7 +535,10 @@ function renderFolderTreePreview(folderName, codigo, tipoxps) {
     psEntries.forEach(([pos, name]) => {
       const fileDiv = document.createElement('div');
       fileDiv.className = 'tree-node tree-indent-2';
-      fileDiv.innerHTML = `🖼️ <span style="color:#d2a8ff;">${pos}-${name}.psd</span> <span class="tree-badge tree-badge-ready">desde W:\\</span>`;
+      const fileName = pos === '1'
+        ? `1-mk${codigo || '[codigo]'}-a.psd`
+        : `${pos}-${name}.psd`;
+      fileDiv.innerHTML = `🖼️ <span style="color:#d2a8ff;">${fileName}</span> <span class="tree-badge tree-badge-ready">desde W:\\</span>`;
       container.appendChild(fileDiv);
     });
   }
@@ -874,7 +880,7 @@ function renderMappingsTable(mappings) {
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td><strong>${tipo}</strong></td>
-      <td><code>${slots['1'] ? `1-${slots['1']}.psd` : '-'}</code></td>
+      <td><code>${slots['1'] ? '1-mk[codigo]-a.psd' : '-'}</code></td>
       <td><code>${slots['2'] ? `2-${slots['2']}.psd` : '-'}</code></td>
       <td><code>${slots['3'] ? `3-${slots['3']}.psd` : '-'}</code></td>
       <td><code>${slots['4'] ? `4-${slots['4']}.psd` : '-'}</code></td>

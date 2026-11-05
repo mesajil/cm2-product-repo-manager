@@ -177,6 +177,26 @@
   ],
   "history": [
     {
+      "id": "1793904996387",
+      "createdAt": "2026-11-05T18:56:36.387Z",
+      "codigo": "043277",
+      "nombre": "MEMORIA micro SD 512GB SANDISK Express",
+      "tipoxps": "MEMORIA-MICRO-SD",
+      "repoDir": "W:\\EDICION_CODIGOS\\2026-11\\05\\043277 - MEMORIA-MICRO-SD",
+      "repoName": "043277 - MEMORIA-MICRO-SD",
+      "filesCount": 3
+    },
+    {
+      "id": "1793904385478",
+      "createdAt": "2026-11-05T18:46:25.478Z",
+      "codigo": "043277",
+      "nombre": "MEMORIA micro SD 512GB SANDISK Express",
+      "tipoxps": "MEMORIA-MICRO-SD",
+      "repoDir": "W:\\EDICION_CODIGOS\\2026-11\\05\\043277 - MEMORIA-MICRO-SD",
+      "repoName": "043277 - MEMORIA-MICRO-SD",
+      "filesCount": 3
+    },
+    {
       "id": "1793896699697",
       "createdAt": "2026-11-05T16:38:19.697Z",
       "codigo": "043274",

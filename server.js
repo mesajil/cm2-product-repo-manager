@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 const { exec, execFile } = require('child_process');
+const { buildPsDestinationFileName } = require('./ps_filename');
 
 const PORT = process.env.PORT || 3456;
 const CONFIG_FILE = path.join(__dirname, 'config.json');
@@ -599,7 +600,7 @@ const server = http.createServer(async (req, res) => {
         if (!templateName || templateName.trim() === '') continue;
 
         const cleanTemplateName = templateName.trim();
-        const destFileName = `${pos}-${cleanTemplateName}.psd`;
+        const destFileName = buildPsDestinationFileName(pos, cleanTemplateName, codigo);
         const destFilePath = path.join(psDir, destFileName);
 
         let copied = false;

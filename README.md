@@ -56,9 +56,12 @@ Dentro de ella se generará la siguiente estructura exacta:
 │   └── mk/                # Carpeta vacía para marcas de agua / recursos MK
 │
 └── ps/                    # Copias de las plantillas de Photoshop requeridas
-    ├── 1-[plantilla].psd  # Renombrado con la posición correspondiente
+    ├── 1-mk[codigo]-a.psd # PS1: nombre basado en el código de producto
     └── 2-[plantilla].psd
 ```
+
+PS1 se copia con el nombre `1-mk[codigo-producto]-a.psd`. Las demás posiciones
+se nombran como `[posición]-[nombre-archivo].psd`.
 
 ---
 
@@ -69,30 +72,30 @@ Las plantillas se obtienen automáticamente del directorio de origen:
 
 | Tipo (`tipoxps`) | Posición | Plantilla Origen | Archivo Resultante en `ps/` |
 |---|---|---|---|
-| `MEMORIA-RAM` | PS1 | `MEMORIA-RAM` | `1-MEMORIA-RAM.psd` |
+| `MEMORIA-RAM` | PS1 | `MEMORIA-RAM` | `1-mk[codigo]-a.psd` |
 | `MEMORIA-RAM` | PS2 | `700x400` | `2-700x400.psd` |
-| `DISCO-DURO-INTERNO` | PS1 | `DISCO-DURO-INTERNO` | `1-DISCO-DURO-INTERNO.psd` |
+| `DISCO-DURO-INTERNO` | PS1 | `DISCO-DURO-INTERNO` | `1-mk[codigo]-a.psd` |
 | `DISCO-DURO-INTERNO` | PS2 | `700x400` | `2-700x400.psd` |
-| `MEMORIA-MICRO-SD` | PS1 | `MEMORIA-MICRO-SD` | `1-MEMORIA-MICRO-SD.psd` |
+| `MEMORIA-MICRO-SD` | PS1 | `MEMORIA-MICRO-SD` | `1-mk[codigo]-a.psd` |
 | `MEMORIA-MICRO-SD` | PS2 | `700x400` | `2-700x400.psd` |
-| `PC MINI` | PS1 | `PC MINI` | `1-PC MINI.psd` |
+| `PC MINI` | PS1 | `PC MINI` | `1-mk[codigo]-a.psd` |
 | `PC MINI` | PS2 | `PUERTOS` | `2-PUERTOS.psd` |
 | `PC MINI` | PS3 | `PUERTOS` | `3-PUERTOS.psd` |
 | `PC MINI` | PS4 | `700x400` | `4-700x400.psd` |
-| `LAPTOP` | PS1 | `LAPTOP` | `1-LAPTOP.psd` |
+| `LAPTOP` | PS1 | `LAPTOP` | `1-mk[codigo]-a.psd` |
 | `LAPTOP` | PS2 | `RESOLUCION` | `2-RESOLUCION.psd` |
 | `LAPTOP` | PS3 | `700x400` | `3-700x400.psd` |
 | `LAPTOP` | PS4 | `LAPTOP-PUERTOS` | `4-LAPTOP-PUERTOS.psd` |
-| `CASE` | PS1 | `CASE` | `1-CASE.psd` |
+| `CASE` | PS1 | `CASE` | `1-mk[codigo]-a.psd` |
 | `CASE` | PS2 | `700x400` | `2-700x400.psd` |
-| `MONITOR` | PS1 | `MONITOR` | `1-MONITOR.psd` |
+| `MONITOR` | PS1 | `MONITOR` | `1-mk[codigo]-a.psd` |
 | `MONITOR` | PS2 | `PUERTOS-MONITOR` | `2-PUERTOS-MONITOR.psd` |
 | `MONITOR` | PS3 | `700x400` | `3-700x400.psd` |
-| `CARGADOR-DE-PARED` | PS1 | `CARGADOR-DE-PARED` | `1-CARGADOR-DE-PARED.psd` |
+| `CARGADOR-DE-PARED` | PS1 | `CARGADOR-DE-PARED` | `1-mk[codigo]-a.psd` |
 | `CARGADOR-DE-PARED` | PS2 | `700x400` | `2-700x400.psd` |
-| `MOCHILA` | PS1 | `MOCHILA` | `1-MOCHILA.psd` |
+| `MOCHILA` | PS1 | `MOCHILA` | `1-mk[codigo]-a.psd` |
 | `MOCHILA` | PS2 | `700x400` | `2-700x400.psd` |
-| `BOLSO` | PS1 | `MOCHILA` | `1-MOCHILA.psd` |
+| `BOLSO` | PS1 | `MOCHILA` | `1-mk[codigo]-a.psd` |
 | `BOLSO` | PS2 | `700x400` | `2-700x400.psd` |
 | `N/A` | PS2 | `700x400` | `2-700x400.psd` |
 

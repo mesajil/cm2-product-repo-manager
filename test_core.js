@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json'), 'utf8'));
+const { buildPsDestinationFileName } = require('./ps_filename');
 
 // Cargar server modules
 const serverCode = fs.readFileSync(path.join(__dirname, 'server.js'), 'utf8');
@@ -189,8 +190,10 @@ function testDirectoryCreation() {
 
   // Simular creación de plantillas PS
   // MEMORIA-RAM -> PS1: MEMORIA-RAM, PS2: 700x400
-  fs.writeFileSync(path.join(psDir, '1-MEMORIA-RAM.psd'), 'PSD_DATA_1', 'utf8');
-  fs.writeFileSync(path.join(psDir, '2-700x400.psd'), 'PSD_DATA_2', 'utf8');
+  const ps1FileName = buildPsDestinationFileName('1', 'MEMORIA-RAM', codigo);
+  const ps2FileName = buildPsDestinationFileName('2', '700x400', codigo);
+  fs.writeFileSync(path.join(psDir, ps1FileName), 'PSD_DATA_1', 'utf8');
+  fs.writeFileSync(path.join(psDir, ps2FileName), 'PSD_DATA_2', 'utf8');
 
   // Aserciones
   if (!fs.existsSync(path.join(docsDir, '104523.txt'))) throw new Error('docs/104523.txt no existe');
@@ -199,14 +202,14 @@ function testDirectoryCreation() {
   const imgContents = fs.readdirSync(imgDir);
   if (imgContents.length !== 1 || imgContents[0] !== 'mk') throw new Error('img/ debe contener únicamente mk/');
   if (fs.readdirSync(mkSub).length !== 0) throw new Error('img/mk no está vacía');
-  if (!fs.existsSync(path.join(psDir, '1-MEMORIA-RAM.psd'))) throw new Error('ps/1-MEMORIA-RAM.psd no existe');
+  if (!fs.existsSync(path.join(psDir, `1-mk${codigo}-a.psd`))) throw new Error('El archivo PS1 no tiene el nombre asociado al código de producto');
   if (!fs.existsSync(path.join(psDir, '2-700x400.psd'))) throw new Error('ps/2-700x400.psd no existe');
 
   console.log('   [OK] Estructura creada verificada al 100%:');
   console.log('        docs/104523.txt (JSON válido)');
   console.log('        img/');
   console.log('        img/mk/ (vacía)');
-  console.log('        ps/1-MEMORIA-RAM.psd');
+  console.log(`        ps/${ps1FileName}`);
   console.log('        ps/2-700x400.psd');
 
   // Limpiar
@@ -228,8 +231,9 @@ function testPcMiniMappings() {
     throw new Error('El mapeo de plantillas PC MINI no coincide con las cuatro posiciones requeridas');
   }
 
-  const outputFiles = Object.entries(mappings).map(([position, template]) => `${position}-${template}.psd`);
-  const expectedFiles = ['1-PC MINI.psd', '2-PUERTOS.psd', '3-PUERTOS.psd', '4-700x400.psd'];
+  const outputFiles = Object.entries(mappings)
+    .map(([position, template]) => buildPsDestinationFileName(position, template, '[codigo]'));
+  const expectedFiles = ['1-mk[codigo]-a.psd', '2-PUERTOS.psd', '3-PUERTOS.psd', '4-700x400.psd'];
   if (JSON.stringify(outputFiles) !== JSON.stringify(expectedFiles)) {
     throw new Error('Los nombres de archivo PS de PC MINI no se generan correctamente');
   }
@@ -256,8 +260,9 @@ function testCougarBrandAndCaseMappings() {
     throw new Error('El mapeo de plantillas CASE no coincide con las dos posiciones requeridas');
   }
 
-  const outputFiles = Object.entries(caseMappings).map(([position, template]) => `${position}-${template}.psd`);
-  const expectedFiles = ['1-CASE.psd', '2-700x400.psd'];
+  const outputFiles = Object.entries(caseMappings)
+    .map(([position, template]) => buildPsDestinationFileName(position, template, '[codigo]'));
+  const expectedFiles = ['1-mk[codigo]-a.psd', '2-700x400.psd'];
   if (JSON.stringify(outputFiles) !== JSON.stringify(expectedFiles)) {
     throw new Error('Los nombres de archivo PS de CASE no se generan correctamente');
   }
@@ -294,8 +299,9 @@ function testSamsungBrandAndMonitorMappings() {
     throw new Error('El mapeo de plantillas MONITOR no coincide con las tres posiciones requeridas');
   }
 
-  const outputFiles = Object.entries(monitorMappings).map(([position, template]) => `${position}-${template}.psd`);
-  const expectedFiles = ['1-MONITOR.psd', '2-PUERTOS-MONITOR.psd', '3-700x400.psd'];
+  const outputFiles = Object.entries(monitorMappings)
+    .map(([position, template]) => buildPsDestinationFileName(position, template, '[codigo]'));
+  const expectedFiles = ['1-mk[codigo]-a.psd', '2-PUERTOS-MONITOR.psd', '3-700x400.psd'];
   if (JSON.stringify(outputFiles) !== JSON.stringify(expectedFiles)) {
     throw new Error('Los nombres de archivo PS de MONITOR no se generan correctamente');
   }
@@ -326,8 +332,9 @@ function testKlipXtremeBrandAndWallChargerMappings() {
     throw new Error('El mapeo de CARGADOR-DE-PARED no coincide con las dos posiciones requeridas');
   }
 
-  const outputFiles = Object.entries(chargerMappings).map(([position, template]) => `${position}-${template}.psd`);
-  const expectedFiles = ['1-CARGADOR-DE-PARED.psd', '2-700x400.psd'];
+  const outputFiles = Object.entries(chargerMappings)
+    .map(([position, template]) => buildPsDestinationFileName(position, template, '[codigo]'));
+  const expectedFiles = ['1-mk[codigo]-a.psd', '2-700x400.psd'];
   if (JSON.stringify(outputFiles) !== JSON.stringify(expectedFiles)) {
     throw new Error('Los nombres de archivo PS de CARGADOR-DE-PARED no se generan correctamente');
   }
@@ -339,8 +346,8 @@ function testBackpackAndBagMappings() {
   console.log('7. Probando mapeos MOCHILA y BOLSO...');
 
   const expectedFilesByType = {
-    'MOCHILA': ['1-MOCHILA.psd', '2-700x400.psd'],
-    'BOLSO': ['1-MOCHILA.psd', '2-700x400.psd']
+    'MOCHILA': ['1-mk[codigo]-a.psd', '2-700x400.psd'],
+    'BOLSO': ['1-mk[codigo]-a.psd', '2-700x400.psd']
   };
 
   for (const [type, expectedFiles] of Object.entries(expectedFilesByType)) {
@@ -350,7 +357,8 @@ function testBackpackAndBagMappings() {
       throw new Error(`El mapeo de ${type} no coincide con las dos posiciones requeridas`);
     }
 
-    const outputFiles = Object.entries(mappings).map(([position, template]) => `${position}-${template}.psd`);
+    const outputFiles = Object.entries(mappings)
+      .map(([position, template]) => buildPsDestinationFileName(position, template, '[codigo]'));
     if (JSON.stringify(outputFiles) !== JSON.stringify(expectedFiles)) {
       throw new Error(`Los nombres de archivo PS de ${type} no se generan correctamente`);
     }
@@ -398,8 +406,9 @@ function testSanDiskBrandAndMicroSdMappings() {
     throw new Error('El mapeo de MEMORIA-MICRO-SD no coincide con las dos posiciones requeridas');
   }
 
-  const outputFiles = Object.entries(microSdMappings).map(([position, template]) => `${position}-${template}.psd`);
-  const expectedFiles = ['1-MEMORIA-MICRO-SD.psd', '2-700x400.psd'];
+  const outputFiles = Object.entries(microSdMappings)
+    .map(([position, template]) => buildPsDestinationFileName(position, template, '[codigo]'));
+  const expectedFiles = ['1-mk[codigo]-a.psd', '2-700x400.psd'];
   if (JSON.stringify(outputFiles) !== JSON.stringify(expectedFiles)) {
     throw new Error('Los nombres de archivo PS de MEMORIA-MICRO-SD no se generan correctamente');
   }
