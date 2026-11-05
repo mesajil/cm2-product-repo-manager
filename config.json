@@ -89,6 +89,13 @@
       "subbrands": [
         "RAZER"
       ]
+    },
+    {
+      "name": "SANDISK",
+      "keyword": "SANDISK",
+      "subbrands": [
+        "SANDISK"
+      ]
     }
   ],
   "tipoxpsMappings": {
@@ -98,6 +105,10 @@
     },
     "DISCO-DURO-INTERNO": {
       "1": "DISCO-DURO-INTERNO",
+      "2": "700x400"
+    },
+    "MEMORIA-MICRO-SD": {
+      "1": "MEMORIA-MICRO-SD",
       "2": "700x400"
     },
     "PC MINI": {
@@ -159,6 +170,16 @@
     "Blanco"
   ],
   "history": [
+    {
+      "id": "1793801642874",
+      "createdAt": "2026-11-04T14:14:02.874Z",
+      "codigo": "043272",
+      "nombre": "MONITOR 39\" LG Gaming UltraGear 39GX90SB-W GX9s",
+      "tipoxps": "MONITOR",
+      "repoDir": "W:\\LUIS\\MSJ\\043272 - MONITOR",
+      "repoName": "043272 - MONITOR",
+      "filesCount": 4
+    },
     {
       "id": "1793743783430",
       "createdAt": "2026-11-03T22:09:43.431Z",

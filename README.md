@@ -73,6 +73,8 @@ Las plantillas se obtienen automáticamente del directorio de origen:
 | `MEMORIA-RAM` | PS2 | `700x400` | `2-700x400.psd` |
 | `DISCO-DURO-INTERNO` | PS1 | `DISCO-DURO-INTERNO` | `1-DISCO-DURO-INTERNO.psd` |
 | `DISCO-DURO-INTERNO` | PS2 | `700x400` | `2-700x400.psd` |
+| `MEMORIA-MICRO-SD` | PS1 | `MEMORIA-MICRO-SD` | `1-MEMORIA-MICRO-SD.psd` |
+| `MEMORIA-MICRO-SD` | PS2 | `700x400` | `2-700x400.psd` |
 | `PC MINI` | PS1 | `PC MINI` | `1-PC MINI.psd` |
 | `PC MINI` | PS2 | `PUERTOS` | `2-PUERTOS.psd` |
 | `PC MINI` | PS3 | `PUERTOS` | `3-PUERTOS.psd` |

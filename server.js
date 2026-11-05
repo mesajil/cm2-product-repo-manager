@@ -103,11 +103,17 @@ function loadConfig() {
         name: 'RAZER',
         keyword: '',
         subbrands: ['RAZER']
+      },
+      {
+        name: 'SANDISK',
+        keyword: 'SANDISK',
+        subbrands: ['SANDISK']
       }
     ],
     tipoxpsMappings: {
       'MEMORIA-RAM': { '1': 'MEMORIA-RAM', '2': '700x400' },
       'DISCO-DURO-INTERNO': { '1': 'DISCO-DURO-INTERNO', '2': '700x400' },
+      'MEMORIA-MICRO-SD': { '1': 'MEMORIA-MICRO-SD', '2': '700x400' },
       'PC MINI': { '1': 'PC MINI', '2': 'PUERTOS', '3': 'PUERTOS', '4': '700x400' },
       'LAPTOP': { '1': 'LAPTOP', '2': 'RESOLUCION', '3': '700x400', '4': 'LAPTOP-PUERTOS' },
       'CASE': { '1': 'CASE', '2': '700x400' },

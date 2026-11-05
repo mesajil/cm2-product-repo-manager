@@ -384,6 +384,29 @@ function testRazerBrand() {
   console.log('   [OK] RAZER ofrece RAZER como submarca');
 }
 
+function testSanDiskBrandAndMicroSdMappings() {
+  console.log('9. Probando marca SANDISK y mapeo MEMORIA-MICRO-SD...');
+
+  const sandisk = config.brands.find(brand => brand.name === 'SANDISK');
+  if (!sandisk || sandisk.keyword !== 'SANDISK' || JSON.stringify(sandisk.subbrands) !== JSON.stringify(['SANDISK'])) {
+    throw new Error('SANDISK debe tener keyword SANDISK y SANDISK como única submarca');
+  }
+
+  const microSdMappings = config.tipoxpsMappings['MEMORIA-MICRO-SD'];
+  const expectedMappings = { '1': 'MEMORIA-MICRO-SD', '2': '700x400' };
+  if (JSON.stringify(microSdMappings) !== JSON.stringify(expectedMappings)) {
+    throw new Error('El mapeo de MEMORIA-MICRO-SD no coincide con las dos posiciones requeridas');
+  }
+
+  const outputFiles = Object.entries(microSdMappings).map(([position, template]) => `${position}-${template}.psd`);
+  const expectedFiles = ['1-MEMORIA-MICRO-SD.psd', '2-700x400.psd'];
+  if (JSON.stringify(outputFiles) !== JSON.stringify(expectedFiles)) {
+    throw new Error('Los nombres de archivo PS de MEMORIA-MICRO-SD no se generan correctamente');
+  }
+
+  console.log('   [OK] SANDISK y MEMORIA-MICRO-SD tienen la configuración requerida');
+}
+
 testJsonFormulas();
 testDirectoryCreation();
 testPcMiniMappings();
@@ -392,4 +415,5 @@ testSamsungBrandAndMonitorMappings();
 testKlipXtremeBrandAndWallChargerMappings();
 testBackpackAndBagMappings();
 testRazerBrand();
+testSanDiskBrandAndMicroSdMappings();
 console.log('\n--- ¡TODAS LAS VALIDACIONES DE LÓGICA DE NEGOCIO PASARON CON ÉXITO! ---');
