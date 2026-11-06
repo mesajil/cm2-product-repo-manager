@@ -109,6 +109,11 @@ function loadConfig() {
         name: 'SANDISK',
         keyword: 'SANDISK',
         subbrands: ['SANDISK']
+      },
+      {
+        name: 'LENOVO',
+        keyword: '',
+        subbrands: ['LENOVO']
       }
     ],
     tipoxpsMappings: {
@@ -125,9 +130,10 @@ function loadConfig() {
       'N/A': { '2': '700x400' }
     },
     brandLogoMappings: {
-      'KLIP XTREME': { directory: 'MARCA', logos: ['KLIP XTREME'] },
-      'RAZER': { directory: 'MARCA', logos: ['RAZER', 'RAZER LOGO'] },
-      'SANDISK': { directory: 'MARCA', logos: ['SANDISK'] }
+      'KLIP XTREME': { directory: 'MARCAS', logos: ['KLIP XTREME'] },
+      'RAZER': { directory: 'MARCAS', logos: ['RAZER', 'RAZER LOGO'] },
+      'SANDISK': { directory: 'MARCAS', logos: ['SANDISK'] },
+      'LENOVO': { directory: 'MARCAS', logos: ['LENOVO'] }
     },
     complementos: ['Black', 'Negro', 'White', 'Blanco'],
     history: []

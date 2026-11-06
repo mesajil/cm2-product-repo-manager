@@ -812,7 +812,7 @@ dom.form.addEventListener('submit', async (e) => {
         const icon = f.status === 'copied' ? '🖼️' : '⚠️';
         const logoNotes = {
           processed: '(Copiado; logos activados según marca)',
-          'skipped-directory': '(Copiado sin cambios: no se encontró MARCA)',
+          'skipped-directory': '(Copiado sin cambios: no se encontró MARCAS)',
           'skipped-logo': '(Copiado sin cambios: no se encontró el logo de la marca)'
         };
         const note = f.status !== 'copied'

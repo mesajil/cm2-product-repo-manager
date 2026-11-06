@@ -377,16 +377,16 @@ function testRazerBrand() {
 
   const logoMappings = config.brandLogoMappings;
   if (!logoMappings || JSON.stringify(logoMappings['KLIP XTREME']) !== JSON.stringify({
-    directory: 'MARCA',
+    directory: 'MARCAS',
     logos: ['KLIP XTREME']
   })) {
-    throw new Error('KLIP XTREME debe activar el logo correspondiente dentro de MARCA');
+    throw new Error('KLIP XTREME debe activar el logo correspondiente dentro de MARCAS');
   }
   if (JSON.stringify(logoMappings.RAZER) !== JSON.stringify({
-    directory: 'MARCA',
+    directory: 'MARCAS',
     logos: ['RAZER', 'RAZER LOGO']
   })) {
-    throw new Error('RAZER debe activar ambos logos correspondientes dentro de MARCA');
+    throw new Error('RAZER debe activar ambos logos correspondientes dentro de MARCAS');
   }
 
   console.log('   [OK] RAZER ofrece RAZER como submarca');
@@ -414,12 +414,31 @@ function testSanDiskBrandAndMicroSdMappings() {
   }
 
   const logoMapping = config.brandLogoMappings.SANDISK;
-  const expectedLogoMapping = { directory: 'MARCA', logos: ['SANDISK'] };
+  const expectedLogoMapping = { directory: 'MARCAS', logos: ['SANDISK'] };
   if (JSON.stringify(logoMapping) !== JSON.stringify(expectedLogoMapping)) {
-    throw new Error('SANDISK debe activar su logo dentro del directorio MARCA');
+    throw new Error('SANDISK debe activar su logo dentro del directorio MARCAS');
   }
 
-  console.log('   [OK] SANDISK activa su logo en MARCA y MEMORIA-MICRO-SD genera sus dos archivos PS');
+  console.log('   [OK] SANDISK activa su logo en MARCAS y MEMORIA-MICRO-SD genera sus dos archivos PS');
+}
+
+function testLenovoBrand() {
+  console.log('10. Probando marca LENOVO...');
+
+  const lenovo = config.brands.find(brand => brand.name === 'LENOVO');
+  if (!lenovo || JSON.stringify(lenovo.subbrands) !== JSON.stringify(['LENOVO'])) {
+    throw new Error('LENOVO debe ofrecer LENOVO como única submarca');
+  }
+
+  const logoMapping = config.brandLogoMappings.LENOVO;
+  if (JSON.stringify(logoMapping) !== JSON.stringify({
+    directory: 'MARCAS',
+    logos: ['LENOVO']
+  })) {
+    throw new Error('LENOVO debe activar su logo dentro del directorio MARCAS');
+  }
+
+  console.log('   [OK] LENOVO activa su logo en MARCAS');
 }
 
 testJsonFormulas();
@@ -431,4 +450,5 @@ testKlipXtremeBrandAndWallChargerMappings();
 testBackpackAndBagMappings();
 testRazerBrand();
 testSanDiskBrandAndMicroSdMappings();
+testLenovoBrand();
 console.log('\n--- ¡TODAS LAS VALIDACIONES DE LÓGICA DE NEGOCIO PASARON CON ÉXITO! ---');

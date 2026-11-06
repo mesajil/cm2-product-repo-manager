@@ -96,6 +96,13 @@
       "subbrands": [
         "SANDISK"
       ]
+    },
+    {
+      "name": "LENOVO",
+      "keyword": "",
+      "subbrands": [
+        "LENOVO"
+      ]
     }
   ],
   "tipoxpsMappings": {
@@ -150,22 +157,28 @@
   },
   "brandLogoMappings": {
     "KLIP XTREME": {
-      "directory": "MARCA",
+      "directory": "MARCAS",
       "logos": [
         "KLIP XTREME"
       ]
     },
     "RAZER": {
-      "directory": "MARCA",
+      "directory": "MARCAS",
       "logos": [
         "RAZER",
         "RAZER LOGO"
       ]
     },
     "SANDISK": {
-      "directory": "MARCA",
+      "directory": "MARCAS",
       "logos": [
         "SANDISK"
+      ]
+    },
+    "LENOVO": {
+      "directory": "MARCAS",
+      "logos": [
+        "LENOVO"
       ]
     }
   },
@@ -176,6 +189,16 @@
     "Blanco"
   ],
   "history": [
+    {
+      "id": "1793905306574",
+      "createdAt": "2026-11-05T19:01:46.574Z",
+      "codigo": "043277",
+      "nombre": "MEMORIA micro SD 512GB SANDISK Express",
+      "tipoxps": "MEMORIA-MICRO-SD",
+      "repoDir": "W:\\EDICION_CODIGOS\\2026-11\\05\\043277 - MEMORIA-MICRO-SD",
+      "repoName": "043277 - MEMORIA-MICRO-SD",
+      "filesCount": 3
+    },
     {
       "id": "1793904996387",
       "createdAt": "2026-11-05T18:56:36.387Z",
